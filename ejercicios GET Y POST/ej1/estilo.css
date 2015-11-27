@@ -1,0 +1,54 @@
+body{
+    background-color: azure;
+
+}
+#glo{
+    width:800px;
+    height:500px;
+}
+#ficha{
+    background-color: cornflowerblue;
+
+}
+#ficha h1{
+    color: white;
+    font-family:cursive;
+
+}
+#centrar{
+    text-align: center;
+    margin-top: 25px;
+
+
+
+}
+#una {
+    margin: 0 auto;
+
+}
+#una th{
+    font-size: 20px;
+
+}
+
+
+
+#datos{
+  background-color: #CEECF5;
+  width:67%;
+  float:right;
+}
+#ima{
+    width:30%;
+    float:left;
+
+}
+
+#name th{
+    font-size: 30px;
+
+}
+.gold{
+    color:goldenrod;
+
+}

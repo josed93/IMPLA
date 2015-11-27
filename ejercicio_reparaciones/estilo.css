@@ -1,0 +1,31 @@
+img{
+    width: 30px;
+    height: 30px;
+    
+
+}
+#anadir{
+    width: 60px;
+    height: 60px;
+}
+
+th{
+    background-color:#FE2E2E;
+    border-style: solid;
+    border-color: #B40404;
+}
+
+table{
+    border-collapse:collapse;
+    border: 2px solid black;    
+    background-color: #F6CECE;    
+
+}
+td{
+    border-right: 1px solid brown;
+    border-bottom: 1px solid brown;
+}
+h1{
+    color:darkslategray;
+
+}

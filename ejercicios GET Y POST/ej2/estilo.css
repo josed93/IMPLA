@@ -1,0 +1,27 @@
+#dialog{
+    background-color:beige;
+}
+
+body{
+    background-color: #e3f2fd;
+
+}
+
+#resumen{
+    float: left;
+    margin-left: 30px;
+    width: 45%;
+    background-color:antiquewhite;
+    border-radius: 20px;
+}
+
+#ima{
+    margin-left: 25px;
+    float: left;
+    width: 25%;
+    padding-top: 50px;
+
+}
+img{
+        border-radius: 20px;
+}
