@@ -3,28 +3,31 @@
     ob_start();
     if(isset($_SESSION["user"])){
         if($_SESSION["rol"] == "admin"){
-            header("Location:../admin/ausuarios.php");
+        
         }
-            
+        else{
+        header("Location:../inicio/inicio.php");
+        }
+        
     }
-    
+    else{
+        header("Location:../inicio/inicio.php");
+    }
 ?>
-
-
 <!DOCTYPE html>
 <html lang="">
-<title>Inicio</title>
+<title>Usuarios Admin</title>
 <?php include("../plantilla/header.php");?>
 <!--<link rel="stylesheet" href="estilo_reg.css">-->
 <body>
     
     <div id="top">
         <div id="logo">
-            <a href="../inicio/inicio.php"><img src="../images/prueba.png"></a>
+            <a href="../admin/ausuarios.php"><img src="../images/prueba.png"></a>
             
         </div>
         <div id="logo2">
-            <a href="../inicio/inicio.php"><img src="../images/logo2.PNG"></a>
+            <a href="../admin/ausuarios.php"><img src="../images/logo2.PNG"></a>
             
         </div>
         <?php include("../plantilla/searchnbar.php");?>
@@ -70,32 +73,8 @@
                   $_SESSION["rol"]=$rol;
                   
                   }
-              
-           /* while($obj = $result->fetch_object()) {
-                  $rol=$obj->ROL;
-              if($_POST["alargar_sesion"] == true){
-                    $_SESSION["user"]=$userlogin;
-                    $_SESSION["rol"]=$rol;
-                    setcookie("PHPSESSID",$userlogin,time() +3600,"/","","",TRUE);
-                    
-              }
-               else{
-                   $_SESSION["user"]=$userlogin;
-                    $_SESSION["rol"]=$rol;
-                    
-                    
-               }
-            }*/
-              
-              
-              
                
-               if ($rol == "admin"){
-                   header("Location:../admin/ausuarios.php"); 
-               }
-               else{
-                    header("Location:../inicio/inicio.php");
-               }
+               
 
             
             }
@@ -182,7 +161,7 @@
                                             </div>
                                             <div class="checkbox">
                                                  <label>
-                                                 <input type="checkbox" name="alargar_sesion"> Mantener en sesión
+                                                 <input type="checkbox"> Mantener en sesión
                                                  </label>
                                             </div>
                                      </form>
@@ -219,59 +198,36 @@
         
         
     </div>
-        <?php include("../plantilla/menu.php");?>
+        <?php include("../admin/amenu.php");?>
         <?php include("../plantilla/alerts.php");?>
 
     <div id="center">
-       <div class="jumbotron">
-  <div class="container text-center">
-    <h1>My Portfolio</h1>      
-    <p>Some text that represents "Me"...</p>
-  </div>
-</div>
-  
-<div class="container-fluid bg-3 text-center">    
-  <h3>Some of my Work</h3><br>
-  <div class="row">
-    <div class="col-sm-3">
-      <p>Some text..</p>
-      <img src="http://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-3"> 
-      <p>Some text..</p>
-      <img src="http://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-3"> 
-      <p>Some text..</p>
-      <img src="http://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-3">
-      <p>Some text..</p>
-      <img src="http://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-  </div>
-</div><br>
-
-<div class="container-fluid bg-3 text-center">    
-  <div class="row">
-    <div class="col-sm-3">
-      <p>Some text..</p>
-      <img src="http://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-3"> 
-      <p>Some text..</p>
-      <img src="http://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-3"> 
-      <p>Some text..</p>
-      <img src="http://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-3">
-      <p>Some text..</p>
-      <img src="http://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-  </div>
-</div><br><br>
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
         
     </div>
     <?php include("../plantilla/footer.php");?>

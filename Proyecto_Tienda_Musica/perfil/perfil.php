@@ -2,10 +2,11 @@
     session_start();
     ob_start();
     if(isset($_SESSION["user"])){
-        if($_SESSION["rol"] == "admin"){
-            header("Location:../admin/ausuarios.php");
-        }
-            
+
+   
+    }
+    else{
+        header("Location:../inicio/inicio.php");
     }
     
 ?>
@@ -13,7 +14,7 @@
 
 <!DOCTYPE html>
 <html lang="">
-<title>Inicio</title>
+<title>Perfil Usuario</title>
 <?php include("../plantilla/header.php");?>
 <!--<link rel="stylesheet" href="estilo_reg.css">-->
 <body>
@@ -222,57 +223,42 @@
         <?php include("../plantilla/menu.php");?>
         <?php include("../plantilla/alerts.php");?>
 
-    <div id="center">
-       <div class="jumbotron">
-  <div class="container text-center">
-    <h1>My Portfolio</h1>      
-    <p>Some text that represents "Me"...</p>
-  </div>
-</div>
+    <div id="center" class="container">
+      <div class="col-md-10 col-md-offset-1">
+       <table style="margin-top:2%;" class="table table-hover table-bordered table-striped table-responsive ">
+       <tr>
+           <td>as</td>
+           <td>as</td>
+           <td>as</td>
+           <td>as</td>
+           <td>as</td>
+       </tr>
+       <tr>
+           <td>as</td>
+           <td>as</td>
+           <td>as</td>
+           <td>as</td>
+           <td>as</td>
+       </tr>
+       <tr>
+           <td>as</td>
+           <td>as</td>
+           <td>as</td>
+           <td>as</td>
+           <td>as</td>
+       </tr>
+       <tr>
+           <td>as</td>
+           <td>as</td>
+           <td>as</td>
+           <td>as</td>
+           <td>as</td>
+       </tr>
+       
+       
   
-<div class="container-fluid bg-3 text-center">    
-  <h3>Some of my Work</h3><br>
-  <div class="row">
-    <div class="col-sm-3">
-      <p>Some text..</p>
-      <img src="http://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-3"> 
-      <p>Some text..</p>
-      <img src="http://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-3"> 
-      <p>Some text..</p>
-      <img src="http://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-3">
-      <p>Some text..</p>
-      <img src="http://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-  </div>
-</div><br>
-
-<div class="container-fluid bg-3 text-center">    
-  <div class="row">
-    <div class="col-sm-3">
-      <p>Some text..</p>
-      <img src="http://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-3"> 
-      <p>Some text..</p>
-      <img src="http://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-3"> 
-      <p>Some text..</p>
-      <img src="http://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-3">
-      <p>Some text..</p>
-      <img src="http://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-  </div>
-</div><br><br>
-        
+        </table>
+        </div>
     </div>
     <?php include("../plantilla/footer.php");?>
     <div class="ir-arriba"><img src="../images/icon_up.PNG"></div>

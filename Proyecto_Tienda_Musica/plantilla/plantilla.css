@@ -2,7 +2,7 @@ div{
     /*border: solid red 1px;*/
     
 }
-/*------------------------------general----------------------*/
+
 body{
     margin: 0;
 
@@ -19,8 +19,8 @@ body{
 
 #center{
     padding-top: 10px;
-    width: 100%;
-    height: 600px;
+    min-width: 100%;
+    min-height: 600px;
     background-image: url(../images/backgroundtext.png);
     border-bottom: solid grey 2px;
     
@@ -31,7 +31,7 @@ body{
     height: 400px;
     background-image: url(../images/top.png);
 }
-/*------------------------TOP-------------------------------*/
+
 
 #logo{
     float: left;
@@ -65,172 +65,119 @@ body{
 /*-------------------------------------------Registro + Logueo---------------------------------------------*/
 /*-------LOGIN COMIENZA AQUÍ -------*/
 
-
-#loginContainer {
-    position:relative;
-    float:left;
-    margin: 20px 0 0 50px;
-    font-size:12px;
+#login-dp{
+    min-width: 262px;
+    padding: 14px 14px 0;
+    overflow:hidden;
+    background-color:#F7D358;
+    margin-left: -41px;
 }
 
-/* Login Button */
-#loginButton { 
-    display:inline-block;
-    float:right;
-    background: url(../images/buttonbg.png)repeat-x; 
-    border-radius:3px;
-    -moz-border-radius:3px;
-    position:relative;
-    z-index:30;
-    cursor:pointer;
+/*--Una vez logueado--*/
+#login-dp2{
+    min-width: 130px;  
+    overflow:hidden;
+    background-color:#FFBF00;
+    margin-left: -41px;
 }
 
-/* Login Button Text */
-#loginButton span {
-    color:#445058; 
-    font-size:14px; 
-    font-weight:bold; 
-    padding:7px 29px 9px 10px;
-    background:url(../images/loginArrow.png) no-repeat 53px 7px;
-    display:block
+#login-dp2 span{
+    margin-right: 10px;
 }
 
-#loginButton:hover {
-    background:url(../images/buttonbgHover.png) repeat-x;
+#login-dp2 li{
+    list-style:none;
+    margin-left: 5px;
+    font-weight: bold;
+    font-size: 12px;
+    width: 130px;
+    
+}
+#login-dp2 a:hover{
+    background-color: #F7D358;
+    color:#2E64FE;
 }
 
-/* Login Box */
-#loginBox {
-    position:absolute;
-    top:34px;
-    right:0;
-    display:none;
-    z-index:29;
+#login-dp2 #uno a{
+    border-bottom: solid grey 1px;
+}
+#login-dp2 #uno{
+    margin-top: -5px;
+    
+    
 }
 
-/* If the Login Button has been clicked */    
-#loginButton.active {
-    border-radius:3px 3px 0 0;
+#login-dp2 #dos{
+    margin-bottom: -5px;
 }
 
-#loginButton.active span {
-    background-position:53px -76px;
+
+/*--------------------*/
+#login-dp .help-block{
+    font-size:12px    
 }
 
-/* A Line added to overlap the border */
-#loginButton.active em {
-    position:absolute;
-    width:100%;
-    height:1px;
-    background:#d2e0ea;
-    bottom:-1px;
+#ent{
+    width: 100px;
+    height: 30px;
+    list-style:none;
+    margin-top: 20px;
+    margin-left: 50px;
+    background-color: #FFBF00;
+    border-radius: 2px;
+    line-height: 30px;
 }
 
-/* Login Form */
-#loginForm {
-    width:248px; 
-    border:1px solid #899caa;
-    border-radius:3px 0 3px 3px;
-    -moz-border-radius:3px 0 3px 3px;
-    margin-top:-1px;
-    background:#d2e0ea;
-    padding:6px;
+
+#ent:hover{
+    background-color: #F7D358;
+    
 }
 
-#loginForm fieldset {
-    margin:0 0 12px 0;
-    display:block;
-    border:0;
-    padding:0;
+#ent a{
+    margin-left: -15px;
+    text-decoration:none; 
+    color: #1C1C1C;
 }
 
-fieldset#body {
-    background-color:#F5ECCE;
-    border-radius:3px;
-    -moz-border-radius:3px;
-    padding:10px 13px;
-    margin:0;
+.checkbox{
+    line-height: 20px;
 }
 
-#loginForm #checkbox {
-    width:auto;
-    margin:1px 9px 0 0;
-    float:left;
-    padding:0;
-    border:0;
-    *margin:-3px 9px 0 0; /* IE7 Fix */
+
+#login-dp .bottom{
+    background-color:rgba(255,255,255,.8);
+    border-top:1px solid #ddd;
+    clear:both;
+    padding:14px;
 }
 
-#body label {
-    color:#3a454d;
-    margin:9px 0 0 0;
-    display:block;
-    float:left;
+#login-dp .form-group {
+    margin-bottom: 10px;
 }
 
-#loginForm #body fieldset label {
-    display:block;
-    float:none;
-    margin:0 0 6px 0;
+@media(max-width:768px){
+    #login-dp{
+        background-color: inherit;
+        color: #fff;
+    }
+    #login-dp .bottom{
+        background-color: inherit;
+        border-top:0 none;
+    }
 }
 
-/* Default Input */
-#loginForm input {
-    width:92%;
-    border:1px solid #899caa;
-    border-radius:3px;
-    -moz-border-radius:3px;
-    color:#3a454d;
-    font-weight:bold;
-    padding:8px 8px;
-    box-shadow:inset 0px 1px 3px #bbb;
-    -webkit-box-shadow:inset 0px 1px 3px #bbb;
-    -moz-box-shadow:inset 0px 1px 3px #bbb;
-    font-size:12px;
-}
-
-/* Sign In Button */
-#loginForm #login {
-    width:auto;
-    float:left;
-    background:#339cdf url(../images/loginbuttonbg.png) repeat-x;
-    color:#fff;
-    padding:7px 10px 8px 10px;
-    text-shadow:0px -1px #278db8;
-    border:1px solid #339cdf;
-    box-shadow:none;
-    -moz-box-shadow:none;
-    -webkit-box-shadow:none;
-    margin:0 12px 0 0;
-    cursor:pointer;
-    *padding:7px 2px 8px 2px; /* IE7 Fix */
-}
-
-/* Forgot your password */
-#loginForm span {
-    text-align:center;
-    display:block;
-    padding:7px 0 4px 0;
-}
-
-#loginForm span a {
-    color:#3a454d;
-    text-shadow:1px 1px #fff;
-    font-size:12px;
-}
-
-input:focus {
-    outline:none;
-}
 
 /*----------------------Boton Registro---------------------------*/
 
 #reg{
     margin: 20px 20px 10px 10px;    
     float:left;
-    background: url(../images/buttonbg.png)repeat-x; 
-    border-radius:3px;
-    -moz-border-radius:3px;
+    width: 150px;
+    height: 30px;
+    background-color: #FFBF00;
+    border-radius:2px;
+    -moz-border-radius:2px;
     position:relative;
     z-index:30;
     cursor:pointer;
@@ -238,25 +185,27 @@ input:focus {
 
 
 #reg span {
-    color:#445058; 
+    color:black; 
     font-size:14px; 
-    font-weight:bold; 
     padding:7px 29px 9px 30px;
+    line-height: 16px;
     
     display:block
 }
+#reg a{text-decoration: none}
 
 #reg:hover {
-    background:url(../images/buttonbgHover.png) repeat-x;
+    background-color: #F7D358;
 }
 
 #reg img{
      margin-top: 0px;
-    margin-right: 5px;
+    margin-right: 10px;
     margin-left: -20px;
     float: left;
     width: 20px;
     height: 20px;
+    
     
 }
 
@@ -298,109 +247,62 @@ input:focus {
 
 
 #carrito img{
-    margin: 10px 20px 0 0;
+    margin: 10px 30px 0 0;
     width: 60px;
     height: 60px;
+    
 
 }
+
+
 
 /*------------------------------------------Barra de busqueda------------------------------------------------*/
 
-#find{
-    margin-left:10%;
-     float: left;
-    width: auto;
-    height: 65px;
+.dropdown.dropdown-lg .dropdown-menu {
+    margin-top: -1px;
+    padding: 6px 20px;
+    background-color:#CED8F6;
+}
+.input-group-btn .btn-group {
+    display: flex !important;
+}
+.btn-group .btn {
+    border-radius: 0;
+    margin-left: -1px;
+}
+.btn-group .btn:last-child {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+.btn-group .form-horizontal .btn[type="submit"] {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
     
 }
-#searchform {
+.form-horizontal .form-group {
+    margin-left: 0;
+    margin-right: 0;
     
-   
-    width: 400px;
-	height:30px;
-    margin:20px auto;
-    background: #ccc;
-    border-radius: 4px;
-    box-shadow: 0 1px 1px rgba(0,0,0,.4) inset, 0 2px 0 rgba(255,255,255,.5);
+}
+.form-group .form-control:last-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
 }
 
-#searchform input {
-    width: 310px;
-	height:20px;
-    padding: 5px;
-    float: left;
-    border: 0;
-    background: #eee;
-    border-radius: 3px 0 0 3px;
-	box-shadow: 0 1px 1px rgba(0,0,0,.4) inset;
+@media screen and (min-width: 768px) {
+    #adv-search {
+        width: 400px;
+        margin: 0 auto;
+    }
+    .dropdown.dropdown-lg {
+        position: static !important;
+    }
+    .dropdown.dropdown-lg .dropdown-menu {
+        min-width: 300px;
+        margin-left: 50px;
+    }
 }
-
-#searchform input:focus {
-    outline: 0;
-	height:21px;
-    background: #fff;
-    box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
-}
-
-#searchform input:-webkit-input-placeholder {
-   color: #999;
-   font-weight: normal;
-   font-style: italic;
-}
-
-#searchform input:-moz-placeholder {
-    color: #999;
-    font-weight: normal;
-    font-style: italic;
-}
-
-#searchform input:-ms-input-placeholder {
-    color: #999;
-    font-weight: normal;
-    font-style: italic;
-}    
-
-#searchform button {
-    position: relative;
-    float: right;
-    border: 0;
-    cursor: pointer;
-    height: 30px;
-    width: 80px;
-    font-size:15px;
-    color: white;
-    font-weight: bold;
-    background: #438cdb;
-    border-radius: 0 3px 3px 0;
-    text-shadow: 0 -1px 0 rgba(0, 0 ,0, .3);
-}   
-
-#searchform button:hover{
-    background: #2672e0;
-}	
-
-#searchform button:active,
-#searchform button:focus{
-    background: #2672e0;
-}
-
-#searchform button:before { /* flecha */
-    content: '';
-    position: absolute;
-    border-width: 8px 8px 8px 0;
-    border-style: solid solid solid none;
-    border-color: transparent #438cdb transparent;
-    top: 8px;
-    left: -5px;
-}
-
-#searchform button:hover:before{
-    border-right-color: #2672e0;
-}
-
-#searchform button:focus:before{
-    border-right-color: #2672e0;
-}    
+ 
 
 /*--------------------------------------------Top Menú--------------------------------------------------*/
 
@@ -444,7 +346,7 @@ div.contenedor_general{
 
 div.contenedor_uno{
 	width:200px;
-	height:36px;
+	height:40px;
 	background-image: url(../images/top.png);
 	overflow: hidden;
 	border-bottom:4px solid #f0296b;
@@ -452,7 +354,7 @@ div.contenedor_uno{
 
 div.contenedor_dos{
 	width:200px;
-	height:36px;
+	height:40px;
 	background-color: #f0296b;
 	overflow: hidden;
 	border-bottom:4px solid black;
@@ -485,7 +387,92 @@ a {
     width: 30px;
     height: 30px;
 }
+/*----------------------------Menu Admin------------------------*/
+#top_menu2{
+	
+	width:auto;
+	height:40px;
+    background-image: url(../images/top.png);
+    
+  
+    
+}
 
+#top_menu2 ul{
+	list-style: none;
+    margin: 0 0 0 100px;
+    height: 40px;
+    
+    
+    
+}
+
+#top_menu2 ul li{
+	float:left;
+	width:200px;
+	height:40px;
+	overflow: hidden;
+	margin:0px;
+}
+
+#top_menu2 .contenedor_general:hover{
+	margin-top:-40px;
+}
+
+#top_menu2 .contenedor_general{
+	width:200px;
+	height:80px;
+	
+	-webkit-transition:margin-top .4s;
+}
+
+#top_menu2 .contenedor_uno{
+	width:200px;
+	height:40px;
+	background-image: url(../images/top.png);
+	overflow: hidden;
+	border-bottom:4px solid #00BFFF;
+}
+
+#top_menu2 .contenedor_dos{
+	width:200px;
+	height:40px;
+	background-color: #00BFFF;
+	overflow: hidden;
+	border-bottom:4px solid black;
+}
+
+#top_menu2 p.texto_uno, p.texto_dos{
+    margin-left: 60px;
+    float: left;
+	text-align: center;
+	margin-top:0px;
+	color:white;
+    font-family: helvetica;
+    font-weight: bold;
+    line-height: 35px;
+}
+#top_menu2 a {
+    text-decoration: none;
+}
+
+#top_menu2 #excep{
+   font-size: 12px;
+}
+
+
+
+#top_menu2 img{
+    margin-top: 2px;
+    margin-left: -50px;
+    float: left;
+    width: 30px;
+    height: 30px;
+}
+#top_menu2 #img1 img,#img2 img,#img3 img{
+    -webkit-filter: invert(100%);
+    filter: invert(100%);
+}
 /*----------------------------Footer-----------------------------*/
 
 .efooter{
@@ -532,6 +519,7 @@ a {
 #fcenter div{
     
     border-bottom: solid #585858 1px;
+    
 }
 
 #fcenter a{
@@ -545,6 +533,9 @@ a {
     line-height: 26px;
     font-family: helvetica;
     font-weight: bold;
+    margin-bottom: 15px;
+    margin-top: 10px;
+    
 
 }
 
@@ -557,6 +548,7 @@ a {
     filter: alpha(opacity=65);
     opacity: 0.65;
     border-radius: 2px;
+    
     
   
 }
@@ -633,6 +625,4 @@ a {
     height: 50px;
     
 }
-
-
 
