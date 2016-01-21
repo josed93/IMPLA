@@ -44,7 +44,7 @@
       //MAKING A SELECT QUERY
       /* Consultas de selección que devuelven un conjunto de resultados */
 
-        $consulta="SELECT * FROM usuario where username='".$userlogin."'and password=md5('".$passlogin."');";
+        $consulta="SELECT * FROM usuario where username='".$userlogin."'and password=md5('".$passlogin."') and estado='activo';";
 
       if ($result = $connection->query($consulta)) {
           if($result->num_rows===0){
@@ -64,10 +64,14 @@
           }else{
               
            while($obj = $result->fetch_object()) {
-                  $rol=$obj->ROL;
+                $rol=$obj->ROL;
+                $estado=$obj->ESTADO;
+                
                   
-                  $_SESSION["user"]=$userlogin;
-                  $_SESSION["rol"]=$rol;
+                $_SESSION["user"]=$userlogin;
+                $_SESSION["rol"]=$rol;
+                $_SESSION["estado"]=$estado;
+                    
                   
                   }
               

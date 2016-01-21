@@ -2,8 +2,8 @@
     session_start();
     ob_start();
     if(isset($_SESSION["user"])){
+        
 
-   
     }
     else{
         header("Location:../inicio/inicio.php");
@@ -220,45 +220,266 @@
         
         
     </div>
-        <?php include("../plantilla/menu.php");?>
+      <!-- EN FUNCIÓN DEL ROL QUE CAMBIE EL MENÚ-->
+       <?php if(isset($_SESSION["user"])){
+        if($_SESSION["rol"] == "admin"){
+            include("../admin/amenu.php");
+        }
+        else{
+            include("../plantilla/menu.php");
+        }
+        
+    }
+      ?> 
+        
         <?php include("../plantilla/alerts.php");?>
 
     <div id="center" class="container">
-      <div class="col-md-10 col-md-offset-1">
-       <table style="margin-top:2%;" class="table table-hover table-bordered table-striped table-responsive ">
-       <tr>
-           <td>as</td>
-           <td>as</td>
-           <td>as</td>
-           <td>as</td>
-           <td>as</td>
-       </tr>
-       <tr>
-           <td>as</td>
-           <td>as</td>
-           <td>as</td>
-           <td>as</td>
-           <td>as</td>
-       </tr>
-       <tr>
-           <td>as</td>
-           <td>as</td>
-           <td>as</td>
-           <td>as</td>
-           <td>as</td>
-       </tr>
-       <tr>
-           <td>as</td>
-           <td>as</td>
-           <td>as</td>
-           <td>as</td>
-           <td>as</td>
-       </tr>
-       
-       
-  
-        </table>
+     
+     
+    <?php if(!isset($_POST["nombre"])): ?>
+     <?php
+      
+      
+      $connection = new mysqli("localhost", "root", "zombiejd93", "tienda_musica");
+     
+       if ($connection->connect_errno) {
+          printf("Conexión fallida %s\n", $mysqli->connect_error);
+          exit();
+      }
+    
+     
+   $result = $connection->query("SELECT * FROM USUARIO WHERE USERNAME= '".$_SESSION['user']."'");
+    
+
+     while($obj=$result->fetch_Object()){
+            
+            $pass=$obj->PASSWORD;
+            $dni=$obj->DNI;
+            $nombre=$obj->NOMBRE;
+            $apellidos=$obj->APELLIDOS;
+            $fecha_nac=$obj->FECHA_NAC;
+            $direccion=$obj->DIRECCION;
+            $tlf=$obj->TLF;
+            $email=$obj->EMAIL;
+            $provincia=$obj->PROVINCIA;
+            $localidad=$obj->LOCALIDAD;
+            $pais=$obj->PAIS;
+
+            
+     }
+
+     
+     echo '<div>
+    <ul class="nav nav-tabs well well-sm">
+      <li class="active"><a href="#home" data-toggle="tab">Datos Personales</a></li>
+      <li><a href="#profile" data-toggle="tab">Datos de la Cuenta</a></li>
+      <li style="float:right;"><a href="./baja.php" style="background-color:red;color:white;text-shadow:-1px 0 black;font-weight:bold">Darse de baja</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+     
+      <div class="tab-pane active in" id="home">
+          <form id="tab" role="form" method="post">
+           <div id="izquierda" style="margin-left:20%;width:25%;height:auto;float:left;">
+            
+              <div class="form-group">
+                <label>DNI</label>
+                
+                  <input type="text" class="form-control" name="dni" value="'.$dni.'">
+                
+              </div>
+            <div class="form-group">
+                <label>Nombre</label>
+                
+                  <input type="text" class="form-control" name="nombre" value="'.$nombre.'">
+                
+             </div>
+             <div class="form-group">
+                <label>Apellidos</label>
+                
+                  <input type="text" class="form-control" name="apellidos" value="'.$apellidos.'">
+                
+             </div>
+             
+             <div class="form-group">
+                <label>Email</label>
+                
+                  <input type="email" class="form-control" name="email" value="'.$email.'">
+                
+             </div>
+             <div class="form-group">
+                <label>Teléfono</label>
+                
+                  <input type="number" class="form-control" name="tlf" value="'.$tlf.'">
+                
+             </div>
+             
+          
+            
         </div>
+        <div id="derecha" style="margin-left:5%;width:25%;height:auto;float:left">
+             
+              <div class="form-group">
+                <label>Fecha de Nacimiento</label>
+                
+                  <input type="date" class="form-control" name="fecha_nac" value="'.$fecha_nac.'">
+                
+              </div>
+            <div class="form-group">
+                <label>Dirección</label>
+                
+                  <input type="text" class="form-control" name="direccion" value="'.$direccion.'">
+                
+             </div>
+             <div class="form-group">
+                <label>Localidad</label>
+                
+                  <input type="text" class="form-control" name="localidad" value="'.$localidad.'">
+                
+             </div>
+             <div class="form-group">
+                <label>Provincia</label>
+                
+                  <input type="text" class="form-control" name="provincia" value="'.$provincia.'">
+                
+             </div>
+             <div class="form-group">
+                <label>País</label>
+                
+                  <input type="text" class="form-control" name="pais" value="'.$pais.'">
+                
+             </div>
+          
+            
+            
+            
+        </div>
+        <div id="modif" style="clear:left;float:right;margin-right:25%;">
+           <input type="submit" class="btn btn-primary" value="Modificar"> 
+        </div>
+        
+      </div>
+      <div class="tab-pane fade" id="profile">
+    	
+        	 
+             <div id="perf1" style="margin-left:20%;width:25%;height:auto;float:left">
+              
+              <div class="form-group">
+                <label>Contraseña</label>
+                
+                  <input type="password" class="form-control" name="old_pass" placeholder="Introduzca su contraseña actual">
+                
+              </div>
+              <p><em>Para poder cambiar su contraseña debe introducir la actual y posteriormente la nueva.</em></p>
+              
+              </div>
+                <div id="perf2" style="margin-left:5%;width:25%;height:auto;float:left">
+                <div class="form-group">
+                    <label>Nueva Contraseña</label>
+                
+                      <input type="password" class="form-control" name="new_pass" placeholder="Introduzca su nueva contraseña">
+                
+                </div>
+                   <div class="form-group">
+                    <label>Confirmar contraseña nueva</label>
+                
+                      <input type="password" class="form-control" name="check_pass" placeholder="Confirme su nueva contraseña">
+                
+                  </div>
+                  
+                    <div id="modif2" style="clear:left;float:right;margin-top:8%;">
+           <input type="submit" class="btn btn-primary" value="Modificar"> 
+            </div>
+                    
+                </div>
+        	
+    	
+        </form>
+      </div>
+    </div>
+    </div>';
+    ?>
+      
+    <?php else: ?>
+       <?php
+        
+            
+            $o_pass=$_POST['old_pass'];
+            $c_pass=$_POST['check_pass'];
+            $n_pass=$_POST['new_pass'];
+            $dni2=$_POST['dni'];
+            $nombre2=$_POST['nombre'];
+            $apellidos2=$_POST['apellidos'];
+            $fecha_nac2=$_POST['fecha_nac'];
+            $direccion2=$_POST['direccion'];
+            $tlf2=$_POST['tlf'];
+            $email2=$_POST['email'];
+            $provincia2=$_POST['provincia'];
+            $localidad2=$_POST['localidad'];
+            $pais2=$_POST['pais'];
+            
+        //ACTUALIZA LOS DATOS PERSONALES DEL USUARIO
+        
+    $connection2 = new mysqli("localhost", "root", "zombiejd93", "tienda_musica");
+     
+       if ($connection2->connect_errno) {
+          printf("Conexión fallida %s\n", $mysqli->connect_error);
+          exit();
+      }
+        $result2 = $connection2->query("UPDATE USUARIO SET DNI='".$dni2."',NOMBRE='".$nombre2."',APELLIDOS='".$apellidos2."',FECHA_NAC='".$fecha_nac2."',DIRECCION='".$direccion2."',TLF='".$tlf2."',EMAIL='".$email2."',PROVINCIA='".$provincia2."',LOCALIDAD='".$localidad2."',PAIS='".$pais2."' WHERE USERNAME= '".$_SESSION['user']."'");
+            
+            unset($connection2);
+
+       
+
+ //ACTUALIZA LOS DATOS DE LA CUENTA DEL USUARIO
+    if($n_pass==$c_pass){
+        $connection3 = new mysqli("localhost", "root", "zombiejd93", "tienda_musica");
+     
+       if ($connection3->connect_errno) {
+          printf("Conexión fallida %s\n", $mysqli->connect_error);
+          exit();
+      }
+        $result3 = $connection3->query("UPDATE USUARIO SET PASSWORD=md5('".$n_pass."') WHERE PASSWORD=md5('".$o_pass."') and USERNAME= '".$_SESSION['user']."'");
+            
+            unset($connection3);
+        echo '  <script type="text/javascript"> 
+                  document.location.href = document.location.href;  
+            </script>';
+          
+    
+
+
+
+
+    }else{
+        echo "Contraseña no coincide";
+    
+    }
+
+
+
+
+
+
+
+
+
+?>
+
+
+
+
+
+
+        
+
+        
+        
+        <?php endif ?>
+   
+    
+    
     </div>
     <?php include("../plantilla/footer.php");?>
     <div class="ir-arriba"><img src="../images/icon_up.PNG"></div>

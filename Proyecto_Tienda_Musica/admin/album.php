@@ -1,32 +1,33 @@
-
 <?php
     session_start();
     ob_start();
     if(isset($_SESSION["user"])){
+        if($_SESSION["rol"] == "admin"){
+        
+        }
+        else{
         header("Location:../inicio/inicio.php");
+        }
         
     }
     else{
-        
+        header("Location:../inicio/inicio.php");
     }
-
-
 ?>
-
 <!DOCTYPE html>
 <html lang="">
-<title>Registro</title>
+<title>Álbum</title>
 <?php include("../plantilla/header.php");?>
-<link rel="stylesheet" href="estilo_reg.css">
+
 <body>
     
     <div id="top">
         <div id="logo">
-            <a href="../inicio/inicio.php"><img src="../images/prueba.png"></a>
+            <a href="../admin/ausuarios.php"><img src="../images/prueba.png"></a>
             
         </div>
         <div id="logo2">
-            <a href="../inicio/inicio.php"><img src="../images/logo2.PNG"></a>
+            <a href="../admin/ausuarios.php"><img src="../images/logo2.PNG"></a>
             
         </div>
         <?php include("../plantilla/searchnbar.php");?>
@@ -46,7 +47,7 @@
       //MAKING A SELECT QUERY
       /* Consultas de selección que devuelven un conjunto de resultados */
 
-        $consulta="SELECT * FROM usuario where username='".$userlogin."'and password=md5('".$passlogin."') and estado='activo';";
+        $consulta="SELECT * FROM usuario where username='".$userlogin."'and password=md5('".$passlogin."');";
 
       if ($result = $connection->query($consulta)) {
           if($result->num_rows===0){
@@ -70,14 +71,11 @@
                   
                   $_SESSION["user"]=$userlogin;
                   $_SESSION["rol"]=$rol;
-
-            
+                  
+                  }
+           
             }
-              header("Location: ../registro/registro.php");
-              
-              
-              
-          }
+       
       }else{
         ?>
               <script type="text/javascript"> 
@@ -91,9 +89,7 @@
               <?php
         }
     }
-      
-
-
+   
     ?>
     <?php
     
@@ -193,138 +189,80 @@
         
         
     </div>
-        <?php include("../plantilla/menu.php");?>
+        <?php include("../admin/amenu.php");?>
         <?php include("../plantilla/alerts.php");?>
 
     <div id="center">
-        <?php include("./r_alerts.php");?>
        
+     <?php
+      
+      $connection = new mysqli("localhost", "root", "zombiejd93", "tienda_musica");
+     
+       if ($connection->connect_errno) {
+          printf("Conexión fallida %s\n", $mysqli->connect_error);
+          exit();
+      }
+    
+     
+   $result = $connection->query("SELECT * FROM USUARIO");
+    
+
+   ?>
+      <div class="col-md-12">
+       <table style="margin-top:2%;" class="table table-hover table-bordered table-responsive ">
+       <tr>
+          
+           <th>USERNAME</th>
+           <th>ROL</th>
+           <th>ESTADO</th>
+           <th>DNI</th>
+           <th>NOMBRE</th>
+           <th>APELLIDOS</th>
+           <th>FECHA_NAC</th>
+           <th>DIRECCION</th>
+           <th>TLF</th>
+           <th>EMAIL</th>
+           <th>PROVINCIA</th>
+           <th>LOCALIDAD</th>
+           <th>PAIS</th>
            
-        
-         <h2>CREAR CUENTA</h2>
-         
+       </tr>
        
-        
-        <div id="izq">
-        
-        
-        
-    
-            <h4>INFORMACIÓN PERSONAL</h4>
-        <form role="form" method="post" action="#">
-        
-        <table>
-            <tr>
-                <td>
-                   <label for="nombre">NOMBRE</label><br>
-                    <input type="text" class="form-control" name="name" id="nombre" placeholder="Introduzca su nombre" required><br>
-                  
-                </td>
-            </tr>
-            <tr>    
-                <td>
-                    <label for="apellidos">APELLIDOS</label><br>
-                    <input type="text" class="form-control" name="proname" id="apellidos" placeholder="Introduzca sus apellidos" required><br>
-                    
-                </td>
-            </tr>      
-            <tr>  
-                <td>
-                   <label for="email">CORREO ELECTRÓNICO</label><br>
-                    <input type="email" class="form-control" name="mail" id="email" placeholder="Introduzca su dirección de correo" required><br>
-                    
-                    
-                    
-                </td>
-            </tr>
-        </table>
-        
-        </div>
-        <div id="der">
-           <h4>INFORMACIÓN DE INICIO DE SESIÓN</h4>
-        
-            <table>
-            <tr>
-                
-                <td>
-                   <label for="nickname">NOMBRE DE USUARIO</label><br>
-                    <input type="text" class="form-control" name="nickname" id="nickname" placeholder="Introduzca un nombre de usuario" required><br>
-                  
-                </td>
-            </tr>
-                <tr>
-                <td>
-                   <label for="password">CONTRASEÑA</label><br>
-                    <input type="password" class="form-control" name="pass" id="password" placeholder="Introduzca una contraseña" required onchange="form.test.pattern = this.value;"><br>
-                  
-                </td>
-            </tr>
-                <tr>
-                <td>
-                   <label for="testpass">CONFIRMAR LA CONTRASEÑA</label><br>
-                    <input type="password" class="form-control" name="test" id="testpass" placeholder="Repita la contraseña anterior" required oninvalid="setCustomValidity('Las contraseñas no coinciden ')"
-    onchange="try{setCustomValidity('')}catch(e){}" /><br>
-                  
-                </td>
-            </tr>
-            
-            </table>
-         
-            
-            
-        </div>
-        <div style="float:left;margin:20px 0 0 250px" class="checkbox">
-            <label>
-            <input type="checkbox" value="" required>
-            <b>Aceptar Términos y Condiciones</b>
-            </label>            
-        </div>
-        
-        <input type="submit" name="sub" id="enviar" value="REGISTRAR">
-        
-        </form> 
-        
-        
-        
-       
-        <?php
-           if(isset ($_POST["nickname"])){
-            $nombre=$_POST["name"];
-            $apellidos=$_POST["proname"];
-            $email=$_POST["mail"];
-            $username=$_POST["nickname"];
-            $password=$_POST["pass"];
-            $confpass=$_POST["test"];
-
-$connection = new mysqli("localhost","root","zombiejd93","tienda_musica");
-    if($connection->connect_errno)
-    {
-        printf("ERROR AL INTENTAR CONECTARSE A LA BASE DE DATOS",$connection->connect_errno);
-        exit();
-    
-    }
-
-    
-     $connection->query("INSERT INTO USUARIO (nombre,apellidos,email,username,password,rol,estado) VALUES ('$nombre','$apellidos','$email','$username',md5('$password'),'user','activo')");
-        
-             echo '  <script type="text/javascript"> 
-                  $(document).ready( function() {
-                    $("#true-reg").show();
-                    $("#true-reg").delay(3000).fadeOut();
-    
-                  });
-                  setTimeout(function(){
-                      window.location.href = "../inicio/inicio.php";
-                  },3000)
-            </script>';
-
-        unset($connection);
- 
-            }
-        ?>
+      <?php
+          //RECORRER OBJETOS DE LA CONSULTA
+          while($obj = $result->fetch_object()) {
+              //PINTAR CADA FILA
+              echo "<tr>";
               
-  
-        
+              echo "<td>".$obj->USERNAME."</td>";
+              echo "<td>".$obj->ROL."</td>";
+              echo "<td>".$obj->ESTADO."</td>";
+              echo "<td>".$obj->DNI."</td>";
+              echo "<td>".$obj->NOMBRE."</td>";
+              echo "<td>".$obj->APELLIDOS."</td>";
+              echo "<td>".$obj->FECHA_NAC."</td>";
+              echo "<td>".$obj->DIRECCION."</td>";
+              echo "<td>".$obj->TLF."</td>";
+              echo "<td>".$obj->EMAIL."</td>";
+              echo "<td>".$obj->PROVINCIA."</td>";
+              echo "<td>".$obj->LOCALIDAD."</td>";
+              echo "<td>".$obj->PAIS."</td>";
+              
+          
+              echo "</tr>";
+              
+              
+          }
+    $result->close();
+          unset($obj);
+          unset($connection);
+    echo '</table>';
+
+       ?>
+   
+        </div>  
+       
+      
         
     </div>
     <?php include("../plantilla/footer.php");?>

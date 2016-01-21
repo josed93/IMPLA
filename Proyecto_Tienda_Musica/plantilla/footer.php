@@ -1,4 +1,4 @@
-<div id="foot">
+<div id="foot" class="container">
         <div id="fizq" class="efooter">
            
            
