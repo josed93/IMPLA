@@ -18,7 +18,7 @@
 <!--<link rel="stylesheet" href="estilo_reg.css">-->
 <body>
     
-    <div id="top">
+    <div id="top" class="container">
         <div id="logo">
             <a href="../inicio/inicio.php"><img src="../images/prueba.png"></a>
             

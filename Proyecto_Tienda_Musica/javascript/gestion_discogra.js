@@ -1,9 +1,9 @@
-//GESTIONAR USUARIO PARA FILTRAR
+//GESTIONAR DISCOGRÁFICA PARA FILTRAR
 $(function(){
-    $("#sea").on('keyup',function(){
-        var datos=$("#sea").val();
+    $("#sdisc").on('keyup',function(){
+        var datos=$("#sdisc").val();
         
-        var uri = '../php/filtrar_usu.php';
+        var uri = '../php/filtrar_discogra.php';
         var array_dato = {"dato":datos};
         
         
@@ -13,7 +13,7 @@ $(function(){
             data: array_dato,
             datatype: "json",
             success:function(data){
-                $("#tu").html(data);
+                $("#tdisc").html(data);
             }
         
         

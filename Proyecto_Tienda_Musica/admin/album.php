@@ -18,6 +18,8 @@
 <html lang="">
 <title>Álbum</title>
 <?php include("../plantilla/header.php");?>
+<script type="text/javascript" src="../javascript/gestion_disco.js"></script>
+</head>
 
 <body>
     
@@ -192,7 +194,20 @@
         <?php include("../admin/amenu.php");?>
         <?php include("../plantilla/alerts.php");?>
 
-    <div id="center">
+    <div id="center" class="container">
+      <div class="container well well-sm" style="margin-bottom:-1%">
+      <a href="./anadir_disco.php"><button type="button" class="btn btn-success col-sm-1">Añadir</button></a>
+      
+	<div class="row">
+	<h5 style="font-weight:bold;color:#00BFFF;float:left;" class="col-md-offset-4">DISCOS AÑADIDOS</h5>
+		<div class="col-md-offset-10" style="margin-right:1%">
+            <div class="input-group custom-search-form" >
+              <input id="sdi" type="text" class="form-control" placeholder="Filtrar por nombre:">
+              
+             </div>
+        </div>
+	</div>
+    </div>
        
      <?php
       
@@ -204,49 +219,35 @@
       }
     
      
-   $result = $connection->query("SELECT * FROM USUARIO");
+   $result = $connection->query("SELECT D.*,A.NOMBRE_A FROM DISCO D,DISCOGRAFICA DF,AUTOR A WHERE D.COD_AUTOR=A.COD_AUTOR GROUP BY D.COD_DISCO");
     
 
    ?>
-      <div class="col-md-12">
+      <div id="tdi" class="col-md-8 col-md-offset-2 table-responsive">
        <table style="margin-top:2%;" class="table table-hover table-bordered table-responsive ">
-       <tr>
+       <tr style="font-weight:bold;text-align:center;background-color:#F2F2F2">
           
-           <th>USERNAME</th>
-           <th>ROL</th>
-           <th>ESTADO</th>
-           <th>DNI</th>
-           <th>NOMBRE</th>
-           <th>APELLIDOS</th>
-           <th>FECHA_NAC</th>
-           <th>DIRECCION</th>
-           <th>TLF</th>
-           <th>EMAIL</th>
-           <th>PROVINCIA</th>
-           <th>LOCALIDAD</th>
-           <th>PAIS</th>
+           <td>TÍTULO</td>
+           <td>AUTOR</td>
+           <td>PRECIO</td>
+           <td colspan="3">OPERACIONES</td>
+           
            
        </tr>
        
       <?php
           //RECORRER OBJETOS DE LA CONSULTA
-          while($obj = $result->fetch_object()) {
+          while($obj = $result->fetch_object()) { 
               //PINTAR CADA FILA
               echo "<tr>";
               
-              echo "<td>".$obj->USERNAME."</td>";
-              echo "<td>".$obj->ROL."</td>";
-              echo "<td>".$obj->ESTADO."</td>";
-              echo "<td>".$obj->DNI."</td>";
-              echo "<td>".$obj->NOMBRE."</td>";
-              echo "<td>".$obj->APELLIDOS."</td>";
-              echo "<td>".$obj->FECHA_NAC."</td>";
-              echo "<td>".$obj->DIRECCION."</td>";
-              echo "<td>".$obj->TLF."</td>";
-              echo "<td>".$obj->EMAIL."</td>";
-              echo "<td>".$obj->PROVINCIA."</td>";
-              echo "<td>".$obj->LOCALIDAD."</td>";
-              echo "<td>".$obj->PAIS."</td>";
+              echo "<td>".$obj->TITULO."</td>";
+              echo "<td>".$obj->NOMBRE_A."</td>";
+              echo "<td>".$obj->PRECIO."&nbsp€</td>";
+              echo "<td><a href='?codisco=$obj->COD_DISCO'><button type='button' class='btn btn-info'>Ver detalles</button></a></td>";
+              echo "<td><a href='./editar_disco.php?codisco=$obj->COD_DISCO'><button type='button' class='btn btn-warning'>Editar</button></a></td>";
+              echo "<td><a href='./borrar_disco.php?codisco=$obj->COD_DISCO'><button type='button' class='btn btn-danger'>Borrar</button></a></td>";
+              
               
           
               echo "</tr>";
@@ -260,7 +261,78 @@
 
        ?>
    
-        </div>  
+        </div>
+         <!------------ VER DETALLES ---------->
+        
+        
+        <?php
+    
+    if(isset($_GET["codisco"])){
+        $codisco=$_GET["codisco"];
+      
+      $connection2 = new mysqli("localhost", "root", "zombiejd93", "tienda_musica");
+     
+       if ($connection2->connect_errno) {
+          printf("Conexión fallida %s\n", $mysqli->connect_error);
+          exit();
+      }
+    
+         
+   $result2 = $connection2->query("SELECT D.*,DF.NOMBRE,COUNT(TITULO_C) AS NUM_CANC,A.NOMBRE_A FROM DISCO D,DISCOGRAFICA DF,CANCION C,AUTOR A WHERE D.COD_DISCOGRA=DF.COD_DISCOGRA AND D.COD_DISCO=C.COD_DISCO AND D.COD_AUTOR=A.COD_AUTOR AND D.COD_DISCO='".$codisco."' GROUP BY D.COD_DISCO");
+    
+
+        
+   ?>
+        <div class="col-md-10 col-md-offset-1" >
+            <div class="nav nav-tabs well well-sm" style="text-align:center;"><h5 style="font-weight:bold;color:#FF8000">DETALLES DEL DISCO</h5></div>
+        <div class="table-responsive">
+       <table style="margin-top:-1%;text-align:center;font-size:90%" class="table table-hover table-bordered">
+       <tr style="font-weight:bold">
+          
+           <td>TÍTULO</td>
+           <td>AUTOR</td>
+           <td>GÉNERO</td>     
+           <td>Nº DE CANCIONES</td>
+           <td>FECHA DE PUBLICACIÓN</td>
+           <td>PRECIO</td>
+           <td>DISCOGRÁFICA</td>
+           
+           
+                      
+       </tr>
+       
+      <?php
+          //RECORRER OBJETOS DE LA CONSULTA
+          while($obj2 = $result2->fetch_object()) {
+              //PINTAR CADA FILA
+              echo "<tr>";
+              
+              echo "<td>".$obj2->TITULO."</td>";
+              echo "<td>".$obj2->NOMBRE_A."</td>";
+              echo "<td>".$obj2->GENERO."</td>";
+              echo "<td>".$obj2->NUM_CANC."</td>";
+              echo "<td>".$obj2->FECHA."</td>";
+              echo "<td>".$obj2->PRECIO."&nbsp€</td>";
+              echo "<td>".$obj2->NOMBRE."</td>";
+              
+              
+              echo "</tr>";
+              
+              
+          }
+        $result2->close();
+          unset($obj2);
+          unset($connection2);
+    
+      echo '</table>';
+        echo '</div>';
+        
+         
+           
+            echo '</div>';
+            }
+
+           ?>   
        
       
         

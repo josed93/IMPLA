@@ -196,7 +196,7 @@
         <?php include("../plantilla/menu.php");?>
         <?php include("../plantilla/alerts.php");?>
 
-    <div id="center">
+    <div id="center" class="container">
         <?php include("./r_alerts.php");?>
        
            

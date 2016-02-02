@@ -2,30 +2,34 @@
     session_start();
     ob_start();
     if(isset($_SESSION["user"])){
+        if($_SESSION["rol"] == "admin"){
+          
+        }
+        else{
+        header("Location:../inicio/inicio.php");
+        }
         
-
     }
     else{
         header("Location:../inicio/inicio.php");
     }
-    
 ?>
 
 
 <!DOCTYPE html>
 <html lang="">
-<title>Perfil Usuario</title>
+<title>Editar Usuarios</title>
 <?php include("../plantilla/header.php");?>
-<!--<link rel="stylesheet" href="estilo_reg.css">-->
+</head>
 <body>
     
     <div id="top">
         <div id="logo">
-            <a href="../inicio/inicio.php"><img src="../images/prueba.png"></a>
+            <a href="../admin/ausuarios.php"><img src="../images/prueba.png"></a>
             
         </div>
         <div id="logo2">
-            <a href="../inicio/inicio.php"><img src="../images/logo2.PNG"></a>
+            <a href="../admin/ausuarios.php"><img src="../images/logo2.PNG"></a>
             
         </div>
         <?php include("../plantilla/searchnbar.php");?>
@@ -240,6 +244,7 @@
     <?php if(!isset($_POST["nombre"])): ?>
      <?php
       
+    $coduser=$_GET['coduser'];
       
       $connection = new mysqli("localhost", "root", "zombiejd93", "tienda_musica");
      
@@ -249,11 +254,12 @@
       }
     
      
-   $result = $connection->query("SELECT * FROM USUARIO WHERE USERNAME= '".$_SESSION['user']."'");
+   $result = $connection->query("SELECT * FROM USUARIO WHERE COD_USU= '".$coduser."'");
     
 
      while($obj=$result->fetch_Object()){
             
+            $username=$obj->USERNAME;
             $pass=$obj->PASSWORD;
             $dni=$obj->DNI;
             $nombre=$obj->NOMBRE;
@@ -265,18 +271,23 @@
             $provincia=$obj->PROVINCIA;
             $localidad=$obj->LOCALIDAD;
             $pais=$obj->PAIS;
+            $estado=$obj->ESTADO;
+            $rol_user=$obj->ROL;
+            
 
             
      }
 
      
-     echo '<div>
+     echo '<div class="container">
     <ul class="nav nav-tabs well well-sm">
       <li class="active"><a href="#home" data-toggle="tab">Datos Personales</a></li>
-      <li><a href="#profile" data-toggle="tab">Datos de la Cuenta</a></li>';
-      if($_SESSION['rol']=='user'){
-      echo '<li style="float:right;"><a href="./baja.php" style="background-color:red;color:white;text-shadow:-1px 0 black;font-weight:bold">Darse de baja</a></li>';
-      }
+      <li><a href="#profile" data-toggle="tab">Datos de la Cuenta</a></li>
+      <li style="font-weight:bold;line-height:40px;font-size:120%" class="col-md-offset-2">Usuario:&nbsp'.$username.'</li>';
+        if($rol_user == 'user'){
+      echo '<li style="float:right;"><a href="./baja_user.php?coduser='.$coduser.'" style="background-color:red;color:white;text-shadow:-1px 0 black;font-weight:bold">Dar de baja</a></li>
+      <li style="float:right;"><a href="./alta_user.php?coduser='.$coduser.'" style="background-color:green;color:white;text-shadow:-1px 0 black;font-weight:bold">Dar de alta</a></li>';
+        }
     echo '</ul>
     <div id="myTabContent" class="tab-content">
      
@@ -365,23 +376,19 @@
     	
         	 
              <div id="perf1" style="margin-left:20%;width:25%;height:auto;float:left">
-              
               <div class="form-group">
-                <label>Contraseña</label>
-                
-                  <input type="password" class="form-control" name="old_pass" placeholder="Introduzca su contraseña actual">
-                
-              </div>
-              <p><em>Para poder cambiar su contraseña debe introducir la actual y posteriormente la nueva.</em></p>
-              
-              </div>
-                <div id="perf2" style="margin-left:5%;width:25%;height:auto;float:left">
-                <div class="form-group">
                     <label>Nueva Contraseña</label>
                 
                       <input type="password" class="form-control" name="new_pass" placeholder="Introduzca su nueva contraseña">
                 
-                </div>
+                </div>';
+              if ($rol_user == 'user'){
+              echo '<p><em>Estado actual de la cuenta<em>:<b> '.$estado.'</b></p>';
+                }
+              echo '</div>
+              
+                <div id="perf2" style="margin-left:5%;width:25%;height:auto;float:left">
+                
                    <div class="form-group">
                     <label>Confirmar contraseña nueva</label>
                 
@@ -406,7 +413,7 @@
        <?php
         
             
-            $o_pass=$_POST['old_pass'];
+            $coduser=$_GET['coduser'];
             $c_pass=$_POST['check_pass'];
             $n_pass=$_POST['new_pass'];
             $dni2=$_POST['dni'];
@@ -428,7 +435,7 @@
           printf("Conexión fallida %s\n", $mysqli->connect_error);
           exit();
       }
-        $result2 = $connection2->query("UPDATE USUARIO SET DNI='".$dni2."',NOMBRE='".$nombre2."',APELLIDOS='".$apellidos2."',FECHA_NAC='".$fecha_nac2."',DIRECCION='".$direccion2."',TLF='".$tlf2."',EMAIL='".$email2."',PROVINCIA='".$provincia2."',LOCALIDAD='".$localidad2."',PAIS='".$pais2."' WHERE USERNAME= '".$_SESSION['user']."'");
+        $result2 = $connection2->query("UPDATE USUARIO SET DNI='".$dni2."',NOMBRE='".$nombre2."',APELLIDOS='".$apellidos2."',FECHA_NAC='".$fecha_nac2."',DIRECCION='".$direccion2."',TLF='".$tlf2."',EMAIL='".$email2."',PROVINCIA='".$provincia2."',LOCALIDAD='".$localidad2."',PAIS='".$pais2."' WHERE COD_USU= '".$coduser."'");
             
             unset($connection2);
 
@@ -442,7 +449,7 @@
           printf("Conexión fallida %s\n", $mysqli->connect_error);
           exit();
       }
-        $result3 = $connection3->query("UPDATE USUARIO SET PASSWORD=md5('".$n_pass."') WHERE PASSWORD=md5('".$o_pass."') and USERNAME= '".$_SESSION['user']."'");
+        $result3 = $connection3->query("UPDATE USUARIO SET PASSWORD=md5('".$n_pass."') WHERE COD_USU= '".$coduser."'");
             
             unset($connection3);
         echo '  <script type="text/javascript"> 

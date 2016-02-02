@@ -31,6 +31,32 @@
 
                     </div></a>
 			</li>
+			<li style="display:none">
+				<a href="../admin/cancion.php"><div class="contenedor_general">
+
+					<div id="img2"  class="contenedor_uno">
+						<p class="texto_uno"><img src="../images/iconos_menu/cancion.png">CANCIONES</p>
+					</div>
+
+					<div class="contenedor_dos">
+                        <p class="texto_dos"><img src="../images/iconos_menu/cancion.png">CANCIONES</p>
+					</div>
+
+                    </div></a>
+			</li>
+			<li style="display:none">
+				<a href="../admin/autor.php"><div class="contenedor_general">
+
+					<div id="img2"  class="contenedor_uno">
+						<p class="texto_uno"><img src="../images/iconos_menu/autor.png">AUTOR</p>
+					</div>
+
+					<div class="contenedor_dos">
+                        <p class="texto_dos"><img src="../images/iconos_menu/autor.png">AUTOR</p>
+					</div>
+
+                    </div></a>
+			</li>
 			<li>
 				<a href="../admin/discogra.php"><div class="contenedor_general">
 

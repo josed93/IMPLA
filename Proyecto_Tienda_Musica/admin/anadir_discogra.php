@@ -3,24 +3,24 @@
     ob_start();
     if(isset($_SESSION["user"])){
         if($_SESSION["rol"] == "admin"){
-        
+          
         }
         else{
-        header("Location:../admin/ausuarios.php");
+        header("Location:../inicio/inicio.php");
         }
         
     }
     else{
-        header("Location:../admin/ausuarios.php");
+        header("Location:../inicio/inicio.php");
     }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="">
-<title>Usuarios</title>
+<title>Añadir Usuarios</title>
 <?php include("../plantilla/header.php");?>
-<script type="text/javascript" src="../javascript/gestio_usuario.js"></script>
 </head>
-
 <body>
     
     <div id="top">
@@ -75,9 +75,40 @@
                   $_SESSION["rol"]=$rol;
                   
                   }
-           
+              
+           /* while($obj = $result->fetch_object()) {
+                  $rol=$obj->ROL;
+              if($_POST["alargar_sesion"] == true){
+                    $_SESSION["user"]=$userlogin;
+                    $_SESSION["rol"]=$rol;
+                    setcookie("PHPSESSID",$userlogin,time() +3600,"/","","",TRUE);
+                    
+              }
+               else{
+                   $_SESSION["user"]=$userlogin;
+                    $_SESSION["rol"]=$rol;
+                    
+                    
+               }
+            }*/
+              
+              
+              
+               
+               if ($rol == "admin"){
+                   header("Location:../admin/ausuarios.php"); 
+               }
+               else{
+                    header("Location:../inicio/inicio.php");
+               }
+
+            
             }
-       
+             
+              
+              
+              
+          
       }else{
         ?>
               <script type="text/javascript"> 
@@ -91,7 +122,9 @@
               <?php
         }
     }
-   
+      
+
+
     ?>
     <?php
     
@@ -154,7 +187,7 @@
                                             </div>
                                             <div class="checkbox">
                                                  <label>
-                                                 <input type="checkbox"> Mantener en sesión
+                                                 <input type="checkbox" name="alargar_sesion"> Mantener en sesión
                                                  </label>
                                             </div>
                                      </form>
@@ -191,170 +224,111 @@
         
         
     </div>
-        <?php include("../admin/amenu.php");?>
+      <!-- EN FUNCIÓN DEL ROL QUE CAMBIE EL MENÚ-->
+       <?php if(isset($_SESSION["user"])){
+        if($_SESSION["rol"] == "admin"){
+            include("../admin/amenu.php");
+        }
+        else{
+            include("../plantilla/menu.php");
+        }
+        
+    }
+      ?> 
+        
         <?php include("../plantilla/alerts.php");?>
 
     <div id="center" class="container">
-      
-      <div class="container well well-sm" style="margin-bottom:-1%">
-      
-	<div class="row">
-	<h5 style="font-weight:bold;color:#00BFFF;float:left;" class="col-md-offset-5">USUARIOS REGISTRADOS</h5>
-		<div class="col-md-offset-10" style="margin-right:1%">
-            <div class="input-group custom-search-form" >
-              <input id="sea" type="text" class="form-control" placeholder="Filtrar por nombre:">
-              
-             </div>
-        </div>
-	</div>
-    </div>
-       
+     
+     
+    <?php if(!isset($_POST["nombrediscogra"])): ?>
      <?php
       
-      $connection = new mysqli("localhost", "root", "zombiejd93", "tienda_musica");
-     
-       if ($connection->connect_errno) {
-          printf("Conexión fallida %s\n", $mysqli->connect_error);
-          exit();
-      }
     
-     
-   $result = $connection->query("SELECT * FROM USUARIO WHERE ROL = 'user' or USERNAME = '".$_SESSION["user"]."'");
-    
-
-   ?>
-     
-     
-      <div id="tu" class="col-md-8 col-md-offset-2 table-responsive">
-      
-
-       <table style="margin-top:2%;" class="table table-hover table-bordered ">
-       <tr style="text-align:center;font-weight:bold;">
-          
-           <td>USERNAME</td>
-           <td>ROL</td>
-           <td>ESTADO</td>
-           <td>NOMBRE</td>
-           <td>EMAIL</td>
-           <td colspan="3">OPERACIONES</td>
-           
-                      
-       </tr>
-       
-      <?php
-          //RECORRER OBJETOS DE LA CONSULTA
-          while($obj = $result->fetch_object()) {
-              //PINTAR CADA FILA
-              echo "<tr>";
-              
-              echo "<td>".$obj->USERNAME."</td>";
-              echo "<td>".$obj->ROL."</td>";
-              echo "<td>".$obj->ESTADO."</td>";
-              echo "<td>".$obj->NOMBRE."</td>";
-              echo "<td>".$obj->EMAIL."</td>";
-              echo "<td><a href='?coduser=$obj->COD_USU'><button type='button' class='btn btn-info'>Ver detalles</button></a></td>";
-              echo "<td><a href='./editar_user.php?coduser=$obj->COD_USU'><button type='button' class='btn btn-warning'>Editar</button></a></td>";
-              echo "<td><a href='./borrar_user.php?coduser=$obj->COD_USU'><button type='button' class='btn btn-danger'>Borrar</button></a></td>";
-              
-              
-              
-              
-          
-              echo "</tr>";
-              
-              
-          }
-    $result->close();
-          unset($obj);
-          unset($connection);
-    echo '</table>';
-
-       ?>
    
-        </div>
-        <!------------ VER DETALLES ---------->
-        
-        
-        <?php
+     echo '<div class="container">
+     <div class="well well-sm" style="text-align:center">
+     <h5 style="font-weight:bold">AÑADIR DISCOGRÁFICAS</h5>
+     
+     </div>
     
-    if(isset($_GET["coduser"])){
-        $cod_user=$_GET["coduser"];
+    <div id="myTabContent" class="tab-content">
+     
+      <div class="tab-pane active in" id="home">
+          <form id="tab" role="form" method="post">
+           <div id="izquierda" style="margin-left:20%;width:25%;height:auto;float:left;">
+            
+              <div class="form-group">
+                <label>NOMBRE</label>
+                
+                  <input type="text" class="form-control" name="nombrediscogra">
+                
+              </div>
+            
+             <div class="form-group">
+                <label>PÁGINA WEB</label>
+                
+                  <input type="text" class="form-control" name="paginaweb">
+                
+             </div>
+        
+        </div>
+        <div id="derecha" style="margin-left:5%;width:25%;height:auto;float:left;">
+            <div class="form-group">
+                <label>FUNDACIÓN</label>
+                
+                  <input type="text" class="form-control" name="fundacion">
+                
+             </div>
+              
+        
+        </div>
+        <div id="modif" style="clear:left;float:right;margin-right:25%;margin-top:-4%">
+           <input type="submit" class="btn btn-success" value="Añadir"> 
+        </div>
+        
+      </div>
       
-      $connection2 = new mysqli("localhost", "root", "zombiejd93", "tienda_musica");
+        </form>
+      </div>
+    </div>
+    </div>';
+    ?>
+      
+    <?php else: ?>
+       <?php
+        
+            
+            $nomb_disc2=$_POST['nombrediscogra'];
+            $pagweb2=$_POST['paginaweb'];
+            $funda2=$_POST['fundacion'];
+            
+            
+        //AÑADE LOS DATOS DE LAS DISCOGRÁFICAS
+        
+    $connection2 = new mysqli("localhost", "root", "zombiejd93", "tienda_musica");
      
        if ($connection2->connect_errno) {
           printf("Conexión fallida %s\n", $mysqli->connect_error);
           exit();
       }
-    
-         
-   $result2 = $connection2->query("SELECT * FROM USUARIO WHERE COD_USU='".$cod_user."' ");
-    
+        $result2 = $connection2->query("INSERT INTO DISCOGRAFICA (NOMBRE,FUNDACION,PAGINA_WEB) VALUES ('$nomb_disc2','$funda2','$pagweb2')");
+            
+            unset($connection2);
 
-   ?>
-        <div class="col-md-12" >
-            <div class="nav nav-tabs well well-sm" style="text-align:center;"><h5 style="font-weight:bold;color:#FF8000">DETALLES DEL USUARIO</h5></div>
-        <div class="table-responsive">
-       <table style="margin-top:0%;text-align:center;font-size:90%" class="table table-hover table-bordered">
-       <tr style="font-weight:bold">
-          
-           <td>USERNAME</td>
-           <td>ROL</td>
-           <td>ESTADO</td>
-           <td>DNI</td>
-           <td>NOMBRE</td>
-           <td>APELLIDOS</td>
-           <td>FECHA DE NACIMIENTO</td>
-           <td>DIRECCIÓN</td>
-           <td>TLF</td>
-           <td>EMAIL</td>
-           <td>PROVINCIA</td>
-           <td>LOCALIDAD</td>
-           <td>PAÍS</td>
-           
-           
-                      
-       </tr>
-       
-      <?php
-          //RECORRER OBJETOS DE LA CONSULTA
-          while($obj2 = $result2->fetch_object()) {
-              //PINTAR CADA FILA
-              echo "<tr>";
-              
-              echo "<td>".$obj2->USERNAME."</td>";
-              echo "<td>".$obj2->ROL."</td>";
-              echo "<td>".$obj2->ESTADO."</td>";
-              echo "<td>".$obj2->DNI."</td>";
-              echo "<td>".$obj2->NOMBRE."</td>";
-              echo "<td>".$obj2->APELLIDOS."</td>";
-              echo "<td>".$obj2->FECHA_NAC."</td>";
-              echo "<td>".$obj2->DIRECCION."</td>";
-              echo "<td>".$obj2->TLF."</td>";
-              echo "<td>".$obj2->EMAIL."</td>";
-              echo "<td>".$obj2->PROVINCIA."</td>";
-              echo "<td>".$obj2->LOCALIDAD."</td>";
-              echo "<td>".$obj2->PAIS."</td>";
-              
-              echo "</tr>";
-              
-              
-          }
-        $result2->close();
-          unset($obj2);
-          unset($connection2);
-    
-      echo '</table>';
-        echo '</div>';
-        
-         
-           
-            echo '</div>';
-            }
+        header("Location:./discogra.php");
+     
 
-           ?> 
-          </div>
-          
+
+
+?>
+
+
+        <?php endif ?>
+   
+    
+    
+    </div>
     <?php include("../plantilla/footer.php");?>
     <div class="ir-arriba"><img src="../images/icon_up.PNG"></div>
     
