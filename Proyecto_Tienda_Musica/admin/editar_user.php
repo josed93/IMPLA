@@ -200,7 +200,7 @@
           </ul>
         </div>
         <div id="reg">
-               <a href="../registro/registro.php" id="regbutton"><span><img src="../images/iconos_menu/reg.PNG"><b>Registrarse</b></span><em></em></a>
+               <a href="../registro/registro.php" id="regbutton"><span><img src="../images/iconos_menu/reg.PNG"><b>Registrarse</b></span></a>
         </div>
     
                  
@@ -285,8 +285,8 @@
       <li><a href="#profile" data-toggle="tab">Datos de la Cuenta</a></li>
       <li style="font-weight:bold;line-height:40px;font-size:120%" class="col-md-offset-2">Usuario:&nbsp'.$username.'</li>';
         if($rol_user == 'user'){
-      echo '<li style="float:right;"><a href="./baja_user.php?coduser='.$coduser.'" style="background-color:red;color:white;text-shadow:-1px 0 black;font-weight:bold">Dar de baja</a></li>
-      <li style="float:right;"><a href="./alta_user.php?coduser='.$coduser.'" style="background-color:green;color:white;text-shadow:-1px 0 black;font-weight:bold">Dar de alta</a></li>';
+      echo '<a href="./baja_user.php?coduser='.$coduser.'" style="float:right"><button type="button" class="btn btn-danger">Dar de baja</button></a>
+      <a href="./alta_user.php?coduser='.$coduser.'" style="float:right;margin-right:1%;"><button type="button" class="btn btn-success">Dar de alta</button></a>';
         }
     echo '</ul>
     <div id="myTabContent" class="tab-content">
@@ -383,7 +383,7 @@
                 
                 </div>';
               if ($rol_user == 'user'){
-              echo '<p><em>Estado actual de la cuenta<em>:<b> '.$estado.'</b></p>';
+              echo '<p><em>Estado actual de la cuenta</em>:<b> '.$estado.'</b></p>';
                 }
               echo '</div>
               

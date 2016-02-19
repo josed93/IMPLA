@@ -3,7 +3,7 @@
     ob_start();
     if(isset($_SESSION["user"])){
         if($_SESSION["rol"] == "admin"){
-          
+        
         }
         else{
         header("Location:../inicio/inicio.php");
@@ -14,13 +14,13 @@
         header("Location:../inicio/inicio.php");
     }
 ?>
-
-
 <!DOCTYPE html>
 <html lang="">
-<title>Añadir Disco</title>
+<title>Autores</title>
 <?php include("../plantilla/header.php");?>
+<script type="text/javascript" src="../javascript/gestion_autor.js"></script>
 </head>
+
 <body>
     
     <div id="top">
@@ -75,40 +75,9 @@
                   $_SESSION["rol"]=$rol;
                   
                   }
-              
-           /* while($obj = $result->fetch_object()) {
-                  $rol=$obj->ROL;
-              if($_POST["alargar_sesion"] == true){
-                    $_SESSION["user"]=$userlogin;
-                    $_SESSION["rol"]=$rol;
-                    setcookie("PHPSESSID",$userlogin,time() +3600,"/","","",TRUE);
-                    
-              }
-               else{
-                   $_SESSION["user"]=$userlogin;
-                    $_SESSION["rol"]=$rol;
-                    
-                    
-               }
-            }*/
-              
-              
-              
-               
-               if ($rol == "admin"){
-                   header("Location:../admin/ausuarios.php"); 
-               }
-               else{
-                    header("Location:../inicio/inicio.php");
-               }
-
-            
+           
             }
-             
-              
-              
-              
-          
+       
       }else{
         ?>
               <script type="text/javascript"> 
@@ -122,9 +91,7 @@
               <?php
         }
     }
-      
-
-
+   
     ?>
     <?php
     
@@ -187,7 +154,7 @@
                                             </div>
                                             <div class="checkbox">
                                                  <label>
-                                                 <input type="checkbox" name="alargar_sesion"> Mantener en sesión
+                                                 <input type="checkbox"> Mantener en sesión
                                                  </label>
                                             </div>
                                      </form>
@@ -224,181 +191,81 @@
         
         
     </div>
-      <!-- EN FUNCIÓN DEL ROL QUE CAMBIE EL MENÚ-->
-       <?php if(isset($_SESSION["user"])){
-        if($_SESSION["rol"] == "admin"){
-            include("../admin/amenu.php");
-        }
-        else{
-            include("../plantilla/menu.php");
-        }
-        
-    }
-      ?> 
-        
+        <?php include("../admin/amenu.php");?>
         <?php include("../plantilla/alerts.php");?>
 
     <div id="center" class="container">
-     
-     
-    <?php if(!isset($_POST["titulo"])): ?>
-     <?php
-      
-    
-   
-      echo '<div class="container">
-    <div class="well well-sm" style="text-align:center">
-     <h5 style="font-weight:bold">AÑADIR DISCOS</h5>
-     
-     </div>
-    <div id="myTabContent" class="tab-content">
-     
-      <div class="tab-pane active in" id="home">
-          <form id="tab" role="form" method="post">
-           <div id="izquierda" style="margin-left:20%;width:25%;height:auto;float:left;">
-            
-              <div class="form-group">
-                <label>Título</label>
-                
-                  <input type="text" class="form-control" name="titulo">
-                
-              </div>
-              <div class="form-group">
-                <label>Autor</label>
-                
-                  <select name="nombreautor" class="form-control" id="sel1">';
-$connection = new mysqli("localhost", "root", "zombiejd93", "tienda_musica");
-     
-       if ($connection->connect_errno) {
-          printf("Conexión fallida %s\n", $mysqli->connect_error);
-          exit();
-      }
-    $result = $connection->query("SELECT DISTINCT * FROM AUTOR A");
-    echo "<option disabled selected>-- elige un autor --</option>";
-
-    while($obj2 = $result->fetch_Object()){
-        
-        echo "<option value='$obj2->COD_AUTOR'>$obj2->NOMBRE_A</option>";
-        
-    }
-  echo '</select>
-             
-                  
-                
-              </div>
-            <div class="form-group">
-                <label>Género</label>
-                
-                  <input type="text" class="form-control" name="genero" >
-                
-             </div>
-             
-             <div class="form-group">
-                <label>Fecha</label>
-                
-                  <input type="date" class="form-control" name="fecha" >
-                
-             </div>
-            
-        </div>
-        <div id="derecha" style="margin-left:5%;width:25%;height:auto;float:left">
-             
-              <div class="form-group">
-                <label>Carátula</label>
-                
-                  <input type="file" class="form-control" name="caratula" >
-                
-              </div>
-            <div class="form-group">
-                <label>Precio</label>
-                
-                  <input type="number" class="form-control" name="precio"  step="any">
-                
-             </div>
-             <div class="form-group">
-                <label>Discográfica:</label>
-  <select name="nombrediscografica" class="form-control" id="sel1">';
-$connection = new mysqli("localhost", "root", "zombiejd93", "tienda_musica");
-     
-       if ($connection->connect_errno) {
-          printf("Conexión fallida %s\n", $mysqli->connect_error);
-          exit();
-      }
-    $result = $connection->query("SELECT DISTINCT * FROM DISCOGRAFICA DG");
-     echo "<option disabled selected>-- elige un discográfica --</option>";
-
-    while($obj3 = $result->fetch_Object()){
-        
-        echo "<option value='$obj3->COD_DISCOGRA'>$obj3->NOMBRE</option>";
-        
-    }
-  echo '</select>
+      <div class="container well well-sm" style="margin-bottom:0%">
+      <a href="./anadir_autor.php"><button type="button" class="btn btn-success col-sm-1">Añadir</button></a>
+	<div class="row">
+	<h5 style="font-weight:bold;color:#00BFFF;float:left;" class="col-md-offset-4">AUTORES AÑADIDOS</h5>
+		<div class="col-md-offset-10" style="margin-right:1%">
+            <div class="input-group custom-search-form" >
+              <input id="scan" type="text" class="form-control" placeholder="Filtrar por nombre:">
               
              </div>
-          
-            
-        </div>
-        <div id="modif" style="clear:left;float:right;margin-right:25%;">
-           <input type="submit" class="btn btn-primary" value="Modificar"> 
         </div>
         
-      </div>
-      
-    	
-        </form>
-      </div>
+	</div>
+   
     </div>
-    </div>';
-    ?>
+       
+     <?php
       
-    <?php else: ?>
-       <?php
-        
-            
-            $titulo2=$_POST['titulo'];
-            $genero2=$_POST['genero'];
-            $fecha2=$_POST['fecha'];
-            $precio2=$_POST['precio'];
-            $nombreautor=$_POST['nombreautor']; 
-            $nombrediscografica=$_POST['nombrediscografica'];
-            $dir_subida='C:\xampp\htdocs\php\Proyecto_Tienda_Musica\images\caratulas';
-            $fichero_subido = $dir_subida . basename($_FILES['caratula']['name']);
-            $caratula2=$_FILES['caratula']['name'];
-                if(move_uploaded_file($_FILES['caratula']['tmp_name'],$fichero_subido)){
-                    echo "El fichero es válido y se subió correctamente.\n";
-    
-                }else{
-                    echo "asaxaxsaxasx";
-                }
-            
-            
-        //AÑADE LOS DATOS DE LOS DISCOS
-        
-    $connection2 = new mysqli("localhost", "root", "zombiejd93", "tienda_musica");
+      $connection = new mysqli("localhost", "root", "zombiejd93", "tienda_musica");
      
-       if ($connection2->connect_errno) {
+       if ($connection->connect_errno) {
           printf("Conexión fallida %s\n", $mysqli->connect_error);
           exit();
       }
-        $result2 = $connection2->query("INSERT INTO DISCO (TITULO,GENERO,FECHA,CARATULA,PRECIO,COD_DISCOGRA,COD_AUTOR) VALUES ('$titulo2','$genero2','$fecha2','$caratula2','$precio2','$nombrediscografica','$nombreautor')");
-
-
-            
-            
-            unset($connection2);
-
-        header("Location:./album.php");
+    
      
+   $result = $connection->query("SELECT * FROM AUTOR");
+    
 
+   ?>
+      <div  id="tcan" class="col-md-6 col-md-offset-3 table-responsive">
+      
+       <table style="margin-top:2%;" class="table table-hover table-bordered ">
+       <tr style="font-weight:bold;text-align:center;background-color:#F2F2F2">
+         
+          <td>CÓDIGO</td>
+           <td>NOMBRE</td>
+           <td>FECHA DE NACIMIENTO</td>
+           <td colspan="2">OPERACIONES</td>
+           
+           
+        </tr>
+       
+      <?php
+          //RECORRER OBJETOS DE LA CONSULTA
+          while($obj = $result->fetch_object()) {
+              //PINTAR CADA FILA
+              echo "<tr>";
+              echo "<td>".$obj->COD_AUTOR."</td>";
+              echo "<td>".$obj->NOMBRE_A."</td>";
+              echo "<td>".$obj->FECHA_NAC."</td>";
+             
+              echo "<td><a href='./editar_autor.php?codautor=$obj->COD_AUTOR'><button type='button' class='btn btn-warning'>Editar</button></a></td>";
+              echo "<td><a href='./borrar_autor.php?codautor=$obj->COD_AUTOR'><button type='button' class='btn btn-danger'>Borrar</button></a></td>";
+              
+              
+          
+              echo "</tr>";
+              
+              
+          }
+    $result->close();
+          unset($obj);
+          unset($connection);
+    echo '</table>';
 
-
-?>
-
-
-        <?php endif ?>
+       ?>
    
-    
-    
+        </div>  
+       
+      
+        
     </div>
     <?php include("../plantilla/footer.php");?>
     <div class="ir-arriba"><img src="../images/icon_up.PNG"></div>

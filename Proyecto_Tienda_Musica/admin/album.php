@@ -19,6 +19,7 @@
 <title>Álbum</title>
 <?php include("../plantilla/header.php");?>
 <script type="text/javascript" src="../javascript/gestion_disco.js"></script>
+<script type="text/javascript" src="../javascript/gestion_cancion.js"></script>
 </head>
 
 <body>
@@ -230,7 +231,7 @@
            <td>TÍTULO</td>
            <td>AUTOR</td>
            <td>PRECIO</td>
-           <td colspan="3">OPERACIONES</td>
+           <td colspan="4">OPERACIONES</td>
            
            
        </tr>
@@ -244,7 +245,8 @@
               echo "<td>".$obj->TITULO."</td>";
               echo "<td>".$obj->NOMBRE_A."</td>";
               echo "<td>".$obj->PRECIO."&nbsp€</td>";
-              echo "<td><a href='?codisco=$obj->COD_DISCO'><button type='button' class='btn btn-info'>Ver detalles</button></a></td>";
+              echo "<td><a href='?codisco1=$obj->COD_DISCO'><button type='button' class='btn btn-info'>Ver detalles</button></a></td>";
+              echo "<td><a href='?codisco2=$obj->COD_DISCO'><button type='button' class='btn btn-primary'>Ver Canciones</button></a></td>";
               echo "<td><a href='./editar_disco.php?codisco=$obj->COD_DISCO'><button type='button' class='btn btn-warning'>Editar</button></a></td>";
               echo "<td><a href='./borrar_disco.php?codisco=$obj->COD_DISCO'><button type='button' class='btn btn-danger'>Borrar</button></a></td>";
               
@@ -267,8 +269,8 @@
         
         <?php
     
-    if(isset($_GET["codisco"])){
-        $codisco=$_GET["codisco"];
+    if(isset($_GET["codisco1"])){
+        $codisco=$_GET["codisco1"];
       
       $connection2 = new mysqli("localhost", "root", "zombiejd93", "tienda_musica");
      
@@ -332,7 +334,84 @@
             echo '</div>';
             }
 
-           ?>   
+           ?>
+           <!------------ VER CANCIONES ---------->
+        
+        
+        <?php
+    
+    if(isset($_GET["codisco2"])){
+        $codisco2=$_GET["codisco2"];
+      
+      $connection3 = new mysqli("localhost", "root", "zombiejd93", "tienda_musica");
+     
+       if ($connection3->connect_errno) {
+          printf("Conexión fallida %s\n", $mysqli->connect_error);
+          exit();
+      }
+    
+         
+   $result3 = $connection3->query("SELECT * FROM CANCION C WHERE C.COD_DISCO='".$codisco2."'");
+    
+
+        
+   ?>
+        <div class="col-md-8 col-md-offset-2" >
+            <div class="nav nav-tabs well well-sm " style="text-align:center;">
+            <a href="./anadir_cancion.php"><button type="button" class="btn btn-success col-sm-1">Añadir</button></a>
+            <div class="row">
+	<h5 style="font-weight:bold;color:#00BFFF;float:left;" class="col-md-offset-4">CANCIONES</h5>
+		<div class="col-md-offset-9" style="margin-right:1%">
+            <div class="input-group custom-search-form" >
+              <input id="scan" type="text" class="form-control" placeholder="Filtrar por nombre:">
+              
+             </div>
+        </div>
+	</div>
+       </div>
+        <div class="table-responsive" >
+       <table id="tcan" style="margin-top:-1%;text-align:center;font-size:90%" class="table table-hover table-bordered">
+       <tr style="font-weight:bold;text-align:center;background-color:#F2F2F2">
+          
+           <td>TÍTULO</td>
+           <td>DURACIÓN</td>
+           <td colspan="2">OPERACIONES</td>
+           
+           
+           
+                      
+       </tr>
+       
+      <?php
+          //RECORRER OBJETOS DE LA CONSULTA
+          while($obj3 = $result3->fetch_object()) {
+              //PINTAR CADA FILA
+              echo "<tr>";
+              
+              echo "<td>".$obj3->TITULO_C."</td>";
+              echo "<td>".$obj3->DURACION."</td>";
+              echo "<td><a href='./editar_cancion.php?codcan=$obj3->COD_CANCION'><button type='button' class='btn btn-warning'>Editar</button></a></td>";
+              echo "<td><a href='./borrar_cancion.php?codcan=$obj3->COD_CANCION'><button type='button' class='btn btn-danger'>Borrar</button></a></td>";
+              
+              
+              
+              echo "</tr>";
+              
+              
+          }
+        $result3->close();
+          unset($obj3);
+          unset($connection3);
+    
+      echo '</table>';
+        echo '</div>';
+        
+         
+           
+            echo '</div>';
+            }
+
+           ?>    
        
       
         

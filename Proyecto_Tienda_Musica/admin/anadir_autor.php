@@ -18,7 +18,7 @@
 
 <!DOCTYPE html>
 <html lang="">
-<title>Editar Discos</title>
+<title>Añadir Autores</title>
 <?php include("../plantilla/header.php");?>
 </head>
 <body>
@@ -241,42 +241,17 @@
     <div id="center" class="container">
      
      
-    <?php if(!isset($_POST["titulo"])): ?>
+    <?php if(!isset($_POST["nombreautor"])): ?>
      <?php
       
-    $codisco=$_GET['codisco'];
-      
-      $connection = new mysqli("localhost", "root", "zombiejd93", "tienda_musica");
-     
-       if ($connection->connect_errno) {
-          printf("Conexión fallida %s\n", $mysqli->connect_error);
-          exit();
-      }
     
-     
-   $result = $connection->query("SELECT D.*,DF.NOMBRE,A.NOMBRE_A FROM DISCO D,DISCOGRAFICA DF, AUTOR A WHERE D.COD_DISCOGRA=DF.COD_DISCOGRA AND D.COD_AUTOR=A.COD_AUTOR AND D.COD_DISCO= '".$codisco."' GROUP BY D.COD_DISCO");
-    
-
-     while($obj=$result->fetch_Object()){
-            
-            $titulo=$obj->TITULO;
-            $autor=$obj->NOMBRE_A;
-            $genero=$obj->GENERO;    
-            $fecha=$obj->FECHA;
-            $caratula=$obj->CARATULA;
-            $precio=$obj->PRECIO;
-            $cod_discogra=$obj->COD_DISCOGRA;
-            $nom_discogra=$obj->NOMBRE;
-            $cod_autor=$obj->COD_AUTOR;
-         
-     }
-
-     
+   
      echo '<div class="container">
-    <div class="well well-sm" style="text-align:center">
-     <h5 style="font-weight:bold">EDITAR DISCOS</h5>
+     <div class="well well-sm" style="text-align:center">
+     <h5 style="font-weight:bold">AÑADIR AUTORES</h5>
      
      </div>
+    
     <div id="myTabContent" class="tab-content">
      
       <div class="tab-pane active in" id="home">
@@ -284,96 +259,31 @@
            <div id="izquierda" style="margin-left:20%;width:25%;height:auto;float:left;">
             
               <div class="form-group">
-                <label>Título</label>
+                <label>NOMBRE</label>
                 
-                  <input type="text" class="form-control" name="titulo" value="'.$titulo.'">
-                
-              </div>
-              <div class="form-group">
-                <label>Autor:</label>
-  <select name="nombreautor" class="form-control" id="sel1">';
-$connection = new mysqli("localhost", "root", "zombiejd93", "tienda_musica");
-     
-       if ($connection->connect_errno) {
-          printf("Conexión fallida %s\n", $mysqli->connect_error);
-          exit();
-      }
-    $result = $connection->query("SELECT DISTINCT * FROM AUTOR A");
-    
-
-    while($obj2 = $result->fetch_Object()){
-        if($cod_autor===$obj2->COD_AUTOR){
-            echo "<option selected value='$obj2->COD_AUTOR'>$obj2->NOMBRE_A</option>";}
-        else{
-        echo "<option value='$obj2->COD_AUTOR'>$obj2->NOMBRE_A</option>";
-        }
-    }
-  echo '</select>
-             
-                  
+                  <input type="text" class="form-control" name="nombreautor">
                 
               </div>
-            <div class="form-group">
-                <label>Género</label>
-                
-                  <input type="text" class="form-control" name="genero" value="'.$genero.'">
-                
-             </div>
-             
-             <div class="form-group">
-                <label>Fecha</label>
-                
-                  <input type="date" class="form-control" name="fecha" value="'.$fecha.'">
-                
-             </div>
             
+             
+        
         </div>
-        <div id="derecha" style="margin-left:5%;width:25%;height:auto;float:left">
-             
-              <div class="form-group">
-                <label>Carátula</label>
-                
-                  <input type="file" class="form-control" name="caratula" value="'.$caratula.'">
-                
-              </div>
+        <div id="derecha" style="margin-left:5%;width:25%;height:auto;float:left;">
             <div class="form-group">
-                <label>Precio</label>
+                <label>FECHA DE NACIMIENTO</label>
                 
-                  <input type="number" class="form-control" name="precio" value="'.$precio.'" step="any">
+                  <input type="date" class="form-control" name="fecha_nac">
                 
              </div>
-             <div class="form-group">
-                <label>Discográfica:</label>
-  <select name="nombrediscografica" class="form-control" id="sel1">';
-$connection = new mysqli("localhost", "root", "zombiejd93", "tienda_musica");
-     
-       if ($connection->connect_errno) {
-          printf("Conexión fallida %s\n", $mysqli->connect_error);
-          exit();
-      }
-    $result = $connection->query("SELECT DISTINCT * FROM DISCOGRAFICA DG");
-    
-
-    while($obj3 = $result->fetch_Object()){
-        if($cod_discogra===$obj3->COD_DISCOGRA){
-            echo "<option selected value='$obj3->COD_DISCOGRA'>$obj3->NOMBRE</option>";}
-        else{
-        echo "<option value='$obj3->COD_DISCOGRA'>$obj3->NOMBRE</option>";
-        }
-    }
-  echo '</select>
               
-             </div>
-          
-            
+        
         </div>
         <div id="modif" style="clear:left;float:right;margin-right:25%;">
-           <input type="submit" class="btn btn-primary" value="Modificar"> 
+           <input type="submit" class="btn btn-success" value="Añadir"> 
         </div>
         
       </div>
       
-    	
         </form>
       </div>
     </div>
@@ -383,18 +293,13 @@ $connection = new mysqli("localhost", "root", "zombiejd93", "tienda_musica");
     <?php else: ?>
        <?php
         
-            $codisco=$_GET['codisco'];
-            $titulo2=$_POST['titulo'];
-            $genero2=$_POST['genero'];
-            $fecha2=$_POST['fecha'];
-            $caratula2=$_POST['caratula'];
-            $precio2=$_POST['precio'];  
+            
             $nombreautor=$_POST['nombreautor'];
-            $nombrediscografica=$_POST['nombrediscografica'];
+            $fecha_nac=$_POST['fecha_nac'];
             
             
             
-        //ACTUALIZA LOS DATOS DE LOS DISCOS
+        //AÑADE LOS DATOS DE LOS AUTORES
         
     $connection2 = new mysqli("localhost", "root", "zombiejd93", "tienda_musica");
      
@@ -402,18 +307,14 @@ $connection = new mysqli("localhost", "root", "zombiejd93", "tienda_musica");
           printf("Conexión fallida %s\n", $mysqli->connect_error);
           exit();
       }
-        $result2 = $connection2->query("UPDATE DISCO D,DISCOGRAFICA DF, AUTOR A SET D.TITULO='".$titulo2."',D.GENERO='".$genero2."',D.FECHA='".$fecha2."',D.CARATULA='".$caratula2."',D.PRECIO='".$precio2."',D.COD_DISCOGRA='".$nombrediscografica."',D.COD_AUTOR='".$nombreautor."' WHERE D.COD_DISCOGRA=DF.COD_DISCOGRA AND D.COD_AUTOR=A.COD_AUTOR AND D.COD_DISCO= '".$codisco."'");
+        $result2 = $connection2->query("INSERT INTO AUTOR (NOMBRE_A,FECHA_NAC) VALUES ('$nombreautor','$fecha_nac')");
             
             unset($connection2);
 
-       
+        header("Location:./autor.php");
+     
 
- 
-        echo '  <script type="text/javascript"> 
-                  document.location.href = document.location.href;  
-            </script>';
-          
-   
+
 
 ?>
 

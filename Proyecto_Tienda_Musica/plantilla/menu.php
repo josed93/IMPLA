@@ -5,7 +5,7 @@
 				<a href="../inicio/inicio.php"><div class="contenedor_general">
 
 					<div class="contenedor_uno">
-						<p class="texto_uno"><img src="../images/iconos_menu/home_white.PNG">INICIO</p>
+						<p class="texto_uno"><img src="../images/iconos_menu/home_black.png">INICIO</p>
 					</div>
 
 					<div class="contenedor_dos">
@@ -22,7 +22,7 @@
 				<a href="../tienda/tienda.php"><div class="contenedor_general">
 
 					<div class="contenedor_uno">
-						<p class="texto_uno"><img src="../images/iconos_menu/tienda_white.PNG">TIENDA</p>
+						<p class="texto_uno"><img src="../images/iconos_menu/tienda_black.PNG">TIENDA</p>
 					</div>
 
 					<div class="contenedor_dos">
@@ -35,7 +35,7 @@
 				<a href="../catalogo/catalogo.php"><div class="contenedor_general">
 
 					<div class="contenedor_uno">
-						<p class="texto_uno"><img src="../images/iconos_menu/catalogo_white.png">CATÁLOGO</p>
+						<p class="texto_uno"><img src="../images/iconos_menu/catalogo_black.PNG">CATÁLOGO</p>
 					</div>
 
 					<div class="contenedor_dos">
@@ -51,7 +51,7 @@
 				<a href="../aboutus/aboutus.php"><div id ="excep" class="contenedor_general">
 
 					<div class="contenedor_uno">
-						<p class="texto_uno"><img src="../images/iconos_menu/aboutus_white.png">SOBRE NOSOTROS</p>
+						<p class="texto_uno"><img src="../images/iconos_menu/aboutus_black.PNG">SOBRE NOSOTROS</p>
 					</div>
 
 					<div class="contenedor_dos">
@@ -66,7 +66,7 @@
 				<a href="../contacto/contacto.php"><div class="contenedor_general">
 
 					<div class="contenedor_uno">
-						<p class="texto_uno"><img src="../images/iconos_menu/contact_white.png">CONTACTO</p>
+						<p class="texto_uno"><img src="../images/iconos_menu/contac_black.PNG">CONTACTO</p>
 					</div>
 
 					<div class="contenedor_dos">

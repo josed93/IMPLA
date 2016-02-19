@@ -1,10 +1,20 @@
-<nav id="top_menu2">
-
-		<ul>
+<nav id="top_menu2" class="navbar navbar-default" role="navigation">
+   <div class="container-fluid">
+   <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <span class="sr-only">Desplegar navegación</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+            
+    </div>
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+		<ul >
 			<li>
-				<a href="../admin/ausuarios.php"><div class="contenedor_general">
+				<a href="../admin/ausuarios.php"><div class="contenedor_general" >
 
-					<div id="img1" class="contenedor_uno">
+					<div class="contenedor_uno">
 						<p class="texto_uno"><img src="../images/iconos_menu/usuarios.png">USUARIOS</p>
 					</div>
 
@@ -21,7 +31,7 @@
 			<li>
 				<a href="../admin/album.php"><div class="contenedor_general">
 
-					<div id="img2"  class="contenedor_uno">
+					<div class="contenedor_uno">
 						<p class="texto_uno"><img src="../images/iconos_menu/album.png">ÁLBUMES</p>
 					</div>
 
@@ -31,41 +41,42 @@
 
                     </div></a>
 			</li>
-			<li style="display:none">
-				<a href="../admin/cancion.php"><div class="contenedor_general">
-
-					<div id="img2"  class="contenedor_uno">
-						<p class="texto_uno"><img src="../images/iconos_menu/cancion.png">CANCIONES</p>
-					</div>
-
-					<div class="contenedor_dos">
-                        <p class="texto_dos"><img src="../images/iconos_menu/cancion.png">CANCIONES</p>
-					</div>
-
-                    </div></a>
-			</li>
-			<li style="display:none">
+			
+			<li>
 				<a href="../admin/autor.php"><div class="contenedor_general">
 
-					<div id="img2"  class="contenedor_uno">
-						<p class="texto_uno"><img src="../images/iconos_menu/autor.png">AUTOR</p>
+					<div class="contenedor_uno">
+						<p class="texto_uno"><img src="../images/iconos_menu/autor.png">AUTORES</p>
 					</div>
 
 					<div class="contenedor_dos">
-                        <p class="texto_dos"><img src="../images/iconos_menu/autor.png">AUTOR</p>
+                        <p class="texto_dos"><img src="../images/iconos_menu/autor.png">AUTORES</p>
 					</div>
 
                     </div></a>
 			</li>
 			<li>
-				<a href="../admin/discogra.php"><div class="contenedor_general">
+				<a href="../admin/discogra.php"><div id ="excep2" class="contenedor_general">
 
-					<div id="img3" class="contenedor_uno">
+					<div class="contenedor_uno">
 						<p class="texto_uno"><img src="../images/iconos_menu/discografica.png">DISCOGRÁFICAS</p>
 					</div>
 
 					<div class="contenedor_dos">
                         <p class="texto_dos"><img src="../images/iconos_menu/discografica.png">DISCOGRÁFICAS</p>
+					</div>
+
+                    </div></a>
+			</li>
+			<li>
+				<a href="../admin/pedidos.php"><div class="contenedor_general">
+
+					<div class="contenedor_uno">
+						<p class="texto_uno"><img src="../images/iconos_menu/pedido.png">PEDIDOS</p>
+					</div>
+
+					<div class="contenedor_dos">
+                        <p class="texto_dos"><img src="../images/iconos_menu/pedido.png">PEDIDOS</p>
 					</div>
 
                     </div></a>
@@ -77,7 +88,7 @@
 				<a href="../aboutus/aboutus.php"><div id ="excep" class="contenedor_general">
 
 					<div class="contenedor_uno">
-						<p class="texto_uno"><img src="../images/iconos_menu/aboutus_white.png">SOBRE NOSOTROS</p>
+						<p class="texto_uno"><img src="../images/iconos_menu/aboutus_black.PNG">SOBRE NOSOTROS</p>
 					</div>
 
 					<div class="contenedor_dos">
@@ -92,7 +103,7 @@
 				<a href="../contacto/contacto.php"><div class="contenedor_general">
 
 					<div class="contenedor_uno">
-						<p class="texto_uno"><img src="../images/iconos_menu/contact_white.png">CONTACTO</p>
+						<p class="texto_uno"><img src="../images/iconos_menu/contac_black.png">CONTACTO</p>
 					</div>
 
 					<div class="contenedor_dos">
@@ -105,6 +116,9 @@
 			
 
 		</ul>
+       </div>
+		</div>
+
 
 
 		

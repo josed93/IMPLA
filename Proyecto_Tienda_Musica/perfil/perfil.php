@@ -275,7 +275,7 @@
       <li class="active"><a href="#home" data-toggle="tab">Datos Personales</a></li>
       <li><a href="#profile" data-toggle="tab">Datos de la Cuenta</a></li>';
       if($_SESSION['rol']=='user'){
-      echo '<li style="float:right;"><a href="./baja.php" style="background-color:red;color:white;text-shadow:-1px 0 black;font-weight:bold">Darse de baja</a></li>';
+      echo '<a href="./baja.php" style="float:right;"><button type="button" class="btn btn-danger">Dar de baja</button></a>';
       }
     echo '</ul>
     <div id="myTabContent" class="tab-content">

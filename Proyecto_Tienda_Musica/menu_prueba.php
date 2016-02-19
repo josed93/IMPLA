@@ -1,9 +1,21 @@
 <!DOCTYPE html>
 <html lang="">
 <title>Discográficas</title>
-<?php include("./plantilla/header.php");?>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="plantilla/plantilla.css">
+    <script type="text/javascript" src="jquery/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="plantilla/plantilla.js"></script>
+    <!-- Versión compilada y comprimida del CSS de Bootstrap -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  
 
-<script type="text/javascript" src="../javascript/gestion_discogra.js"></script>
+    <!-- Versión compilada y comprimida del JavaScript de Bootstrap -->
+    <script src="bootstrap3/js/bootstrap.min.js"></script>
+
 </head>
 
   <body>
@@ -85,7 +97,7 @@
    font-size: 11px;
 }
     #top_menu2 #excep2{
-   font-size: 13px;
+   font-size: 10px;
 }
 
 
@@ -101,7 +113,7 @@
     -webkit-filter: invert(100%);
     filter: invert(100%);
 }
-       
+/*------------------Al contraerse----------------*/       
 @media (max-width: 1358px) {
     .navbar-header {
         float: none;
@@ -111,6 +123,7 @@
     }
     .navbar-toggle {
         display: block;
+        
     }
     .navbar-collapse {
         border-top: 1px solid transparent;
@@ -136,6 +149,47 @@
     }
     .collapse.in{
         display:block !important;
+    }
+    
+    #top_menu2 ul li{
+      
+	left:-47px;
+    position:relative;    
+	width:110%;
+	height:49px;
+	overflow: hidden;
+	margin:0px;
+    }
+    
+    #top_menu2 .contenedor_general{
+	width:100%;
+	height:100px;
+	
+	-webkit-transition:margin-top .4s;
+    }
+
+#top_menu2 .contenedor_uno{
+    padding-top:6px;
+	width:100%;
+	height:50px;
+	background-image: url(./images/top.png);
+	overflow: hidden;
+	border-bottom:4px solid #00BFFF;
+    }
+
+#top_menu2 .contenedor_dos{
+	width:100%;
+	height:40px;
+	background-color: #00BFFF;
+	overflow: hidden;
+	border-bottom:4px solid black;
+    }
+    
+#top_menu2 #excep{
+   font-size: 14px;
+    }
+#top_menu2 #excep2{
+   font-size: 14px;
     }
 }       
        

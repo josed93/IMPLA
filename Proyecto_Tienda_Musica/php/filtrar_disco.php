@@ -19,7 +19,7 @@
            <td>TÍTULO</td>
            <td>AUTOR</td>
            <td>PRECIO</td>
-           <td colspan="3">OPERACIONES</td>
+           <td colspan="4">OPERACIONES</td>
            
            
        </tr>';
@@ -34,6 +34,7 @@
               echo "<td>".$obj->NOMBRE_A."</td>";
               echo "<td>".$obj->PRECIO."&nbsp€</td>";
               echo "<td><a href='?codisco=$obj->COD_DISCO'><button type='button' class='btn btn-info'>Ver detalles</button></a></td>";
+              echo "<td><a href='?codisco2=$obj->COD_DISCO'><button type='button' class='btn btn-primary'>Ver Canciones</button></a></td>";
               echo "<td><a href='./editar_disco.php?codisco=$obj->COD_DISCO'><button type='button' class='btn btn-warning'>Editar</button></a></td>";
               echo "<td><a href='./borrar_disco.php?codisco=$obj->COD_DISCO'><button type='button' class='btn btn-danger'>Borrar</button></a></td>";
               

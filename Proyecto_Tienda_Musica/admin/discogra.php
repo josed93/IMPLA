@@ -227,7 +227,7 @@
       <div  id="tdisc" class="col-md-8 col-md-offset-2 table-responsive">
       
        <table style="margin-top:2%;" class="table table-hover table-bordered ">
-       <tr style="font-weight:bold;text-align:center">
+       <tr style="font-weight:bold;text-align:center;background-color:#F2F2F2">
          
           <td>CÓDIGO</td>
            <td>NOMBRE</td>

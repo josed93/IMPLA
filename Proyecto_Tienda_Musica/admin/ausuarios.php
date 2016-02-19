@@ -229,7 +229,7 @@
       
 
        <table style="margin-top:2%;" class="table table-hover table-bordered ">
-       <tr style="text-align:center;font-weight:bold;">
+       <tr style="text-align:center;font-weight:bold;background-color:#F2F2F2">
           
            <td>USERNAME</td>
            <td>ROL</td>

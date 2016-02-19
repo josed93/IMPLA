@@ -18,7 +18,7 @@
 
 <!DOCTYPE html>
 <html lang="">
-<title>Editar Discos</title>
+<title>Editar Canción</title>
 <?php include("../plantilla/header.php");?>
 </head>
 <body>
@@ -244,7 +244,7 @@
     <?php if(!isset($_POST["titulo"])): ?>
      <?php
       
-    $codisco=$_GET['codisco'];
+    $codcan=$_GET['codcan'];
       
       $connection = new mysqli("localhost", "root", "zombiejd93", "tienda_musica");
      
@@ -254,27 +254,23 @@
       }
     
      
-   $result = $connection->query("SELECT D.*,DF.NOMBRE,A.NOMBRE_A FROM DISCO D,DISCOGRAFICA DF, AUTOR A WHERE D.COD_DISCOGRA=DF.COD_DISCOGRA AND D.COD_AUTOR=A.COD_AUTOR AND D.COD_DISCO= '".$codisco."' GROUP BY D.COD_DISCO");
+   $result = $connection->query("SELECT C.TITULO_C,C.DURACION FROM CANCION C WHERE C.COD_CANCION= '".$codcan."'");
     
 
      while($obj=$result->fetch_Object()){
             
-            $titulo=$obj->TITULO;
-            $autor=$obj->NOMBRE_A;
-            $genero=$obj->GENERO;    
-            $fecha=$obj->FECHA;
-            $caratula=$obj->CARATULA;
-            $precio=$obj->PRECIO;
-            $cod_discogra=$obj->COD_DISCOGRA;
-            $nom_discogra=$obj->NOMBRE;
-            $cod_autor=$obj->COD_AUTOR;
+            $titulo=$obj->TITULO_C;
+            $duracion=$obj->DURACION;
+            
+            
+            
          
      }
 
      
      echo '<div class="container">
     <div class="well well-sm" style="text-align:center">
-     <h5 style="font-weight:bold">EDITAR DISCOS</h5>
+     <h5 style="font-weight:bold">EDITAR CANCIÓN</h5>
      
      </div>
     <div id="myTabContent" class="tab-content">
@@ -289,82 +285,17 @@
                   <input type="text" class="form-control" name="titulo" value="'.$titulo.'">
                 
               </div>
-              <div class="form-group">
-                <label>Autor:</label>
-  <select name="nombreautor" class="form-control" id="sel1">';
-$connection = new mysqli("localhost", "root", "zombiejd93", "tienda_musica");
-     
-       if ($connection->connect_errno) {
-          printf("Conexión fallida %s\n", $mysqli->connect_error);
-          exit();
-      }
-    $result = $connection->query("SELECT DISTINCT * FROM AUTOR A");
-    
-
-    while($obj2 = $result->fetch_Object()){
-        if($cod_autor===$obj2->COD_AUTOR){
-            echo "<option selected value='$obj2->COD_AUTOR'>$obj2->NOMBRE_A</option>";}
-        else{
-        echo "<option value='$obj2->COD_AUTOR'>$obj2->NOMBRE_A</option>";
-        }
-    }
-  echo '</select>
-             
-                  
-                
-              </div>
-            <div class="form-group">
-                <label>Género</label>
-                
-                  <input type="text" class="form-control" name="genero" value="'.$genero.'">
-                
-             </div>
-             
-             <div class="form-group">
-                <label>Fecha</label>
-                
-                  <input type="date" class="form-control" name="fecha" value="'.$fecha.'">
-                
-             </div>
+              
             
         </div>
         <div id="derecha" style="margin-left:5%;width:25%;height:auto;float:left">
              
               <div class="form-group">
-                <label>Carátula</label>
+                <label>Duración</label>
                 
-                  <input type="file" class="form-control" name="caratula" value="'.$caratula.'">
+                  <input type="text" class="form-control" name="duracion" value="'.$duracion.'">
                 
               </div>
-            <div class="form-group">
-                <label>Precio</label>
-                
-                  <input type="number" class="form-control" name="precio" value="'.$precio.'" step="any">
-                
-             </div>
-             <div class="form-group">
-                <label>Discográfica:</label>
-  <select name="nombrediscografica" class="form-control" id="sel1">';
-$connection = new mysqli("localhost", "root", "zombiejd93", "tienda_musica");
-     
-       if ($connection->connect_errno) {
-          printf("Conexión fallida %s\n", $mysqli->connect_error);
-          exit();
-      }
-    $result = $connection->query("SELECT DISTINCT * FROM DISCOGRAFICA DG");
-    
-
-    while($obj3 = $result->fetch_Object()){
-        if($cod_discogra===$obj3->COD_DISCOGRA){
-            echo "<option selected value='$obj3->COD_DISCOGRA'>$obj3->NOMBRE</option>";}
-        else{
-        echo "<option value='$obj3->COD_DISCOGRA'>$obj3->NOMBRE</option>";
-        }
-    }
-  echo '</select>
-              
-             </div>
-          
             
         </div>
         <div id="modif" style="clear:left;float:right;margin-right:25%;">
@@ -383,18 +314,14 @@ $connection = new mysqli("localhost", "root", "zombiejd93", "tienda_musica");
     <?php else: ?>
        <?php
         
-            $codisco=$_GET['codisco'];
+            $codcan2=$_GET['codcan'];
             $titulo2=$_POST['titulo'];
-            $genero2=$_POST['genero'];
-            $fecha2=$_POST['fecha'];
-            $caratula2=$_POST['caratula'];
-            $precio2=$_POST['precio'];  
-            $nombreautor=$_POST['nombreautor'];
-            $nombrediscografica=$_POST['nombrediscografica'];
+            $duracion2=$_POST['duracion'];
             
             
             
-        //ACTUALIZA LOS DATOS DE LOS DISCOS
+            
+        //ACTUALIZA LOS DATOS DE LAS CANCIONES
         
     $connection2 = new mysqli("localhost", "root", "zombiejd93", "tienda_musica");
      
@@ -402,7 +329,7 @@ $connection = new mysqli("localhost", "root", "zombiejd93", "tienda_musica");
           printf("Conexión fallida %s\n", $mysqli->connect_error);
           exit();
       }
-        $result2 = $connection2->query("UPDATE DISCO D,DISCOGRAFICA DF, AUTOR A SET D.TITULO='".$titulo2."',D.GENERO='".$genero2."',D.FECHA='".$fecha2."',D.CARATULA='".$caratula2."',D.PRECIO='".$precio2."',D.COD_DISCOGRA='".$nombrediscografica."',D.COD_AUTOR='".$nombreautor."' WHERE D.COD_DISCOGRA=DF.COD_DISCOGRA AND D.COD_AUTOR=A.COD_AUTOR AND D.COD_DISCO= '".$codisco."'");
+        $result2 = $connection2->query("UPDATE CANCION C SET C.TITULO_C='".$titulo2."',C.DURACION='".$duracion2."' WHERE C.COD_CANCION= '".$codcan2."'");
             
             unset($connection2);
 
